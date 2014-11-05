@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C909B159-2923-46DF-BE49-AC6C3D0A34A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibHTreeProcessing</RootNamespace>
+    <AssemblyName>LibHTreeProcessing</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LibNLPCSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Proj\NLPCSharp\NLPCSharp\bin\Debug\LibNLPCSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\backgroundtasks\AbstractBackgroundTask.cs" />
+    <Compile Include="src\backgroundtasks\BackgroundTaskLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\backgroundtasks\BackgroundTaskLabel.Designer.cs">
+      <DependentUpon>BackgroundTaskLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\backgroundtasks\BackgroundTaskList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\backgroundtasks\BackgroundTaskList.Designer.cs">
+      <DependentUpon>BackgroundTaskList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\backgroundtasks\EnumBackgroundTaskState.cs" />
+    <Compile Include="src\backgroundtasks\IBackgroundTask.cs" />
+    <Compile Include="src\backgroundtasks\OnBackgroundTaskDelegate.cs" />
+    <Compile Include="src\gui\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\gui\MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\gui\MainForm.HelperMethods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\gui\RichTextLineNumbers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="src\gui\ScriptEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\gui\ScriptEditorControl.Designer.cs">
+      <DependentUpon>ScriptEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\gui\SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\gui\SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\gui\SearchFormController.cs" />
+    <Compile Include="src\gui\SimpleTreeVisualizer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\gui\SimpleTreeVisualizer.designer.cs">
+      <DependentUpon>SimpleTreeVisualizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\gui\SourceCodeTextControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\gui\SourceCodeTextControl.Designer.cs">
+      <DependentUpon>SourceCodeTextControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\gui\TransformHierarchicalDocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\gui\TransformHierarchicalDocumentForm.designer.cs">
+      <DependentUpon>TransformHierarchicalDocumentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\HierarchyPath.cs" />
+    <Compile Include="src\LoadingQueue.cs" />
+    <Compile Include="src\simplexml\HXmlException.cs" />
+    <Compile Include="src\simplexml\impl\MyBufferedCharacterStream.cs" />
+    <Compile Include="src\simplexml\impl\MyChar.cs" />
+    <Compile Include="src\simplexml\impl\MyCharacterStream.cs" />
+    <Compile Include="src\simplexml\HToolkit.XMLLoad.cs" />
+    <Compile Include="src\simplexml\HToolkit.XMLSave.cs" />
+    <Compile Include="src\simplexml\impl\HXmlParser.cs" />
+    <Content Include="src\simplexml\impl\HXmlParser.Grammar.txt" />
+    <Compile Include="src\simplexml\impl\MyToken.cs" />
+    <Compile Include="src\simplexml\impl\MyTokenizer.cs" />
+    <Compile Include="src\stringmatching\AbstractStringMatcher.cs" />
+    <Compile Include="src\stringmatching\StringMatcherContains.cs" />
+    <Compile Include="src\stringmatching\StringMatcherEndsWith.cs" />
+    <Compile Include="src\stringmatching\StringMatcherEquals.cs" />
+    <Compile Include="src\stringmatching\StringMatcherStartsWith.cs" />
+    <Compile Include="src\transformation2\cmds\AbstractScriptCommandParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\CloneNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\CloneNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\SetAsTextAtNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\SetAsTextAtNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\SetAsAttributeAtNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\SetAsAttributeAtNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\SetAtNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\SetAtNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\CopyFromClipboard_Operation.cs" />
+    <Compile Include="src\transformation2\operations\CopyFromClipboard_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\CopyToClipboard_Operation.cs" />
+    <Compile Include="src\transformation2\operations\CopyToClipboard_ParserComponent.cs" />
+    <Compile Include="src\transformation2\cmds\LoadXmlFileIntoClipboard_Operation.cs" />
+    <Compile Include="src\transformation2\cmds\LoadXmlFileIntoClipboard_ParserComponent.cs" />
+    <Compile Include="src\transformation2\cmds\IExtraCommands.cs" />
+    <Compile Include="src\transformation2\operations\MoveFromClipboard_Operation.cs" />
+    <Compile Include="src\transformation2\operations\MoveFromClipboard_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\MoveToClipboard_Operation.cs" />
+    <Compile Include="src\transformation2\operations\MoveToClipboard_ParserComponent.cs" />
+    <Compile Include="src\transformation2\cmds\Noop_ParserComponent.cs" />
+    <Compile Include="src\transformation2\cmds\Noop_TransformationRule.cs" />
+    <Compile Include="src\transformation2\filters\TransformEntitiesByClipboardMap_Operation.cs" />
+    <Compile Include="src\transformation2\filters\TransformEntitiesByClipboardMap_ParserComponent.cs" />
+    <Compile Include="src\transformation2\filters\TransformByClipboardMap_Operation.cs" />
+    <Compile Include="src\transformation2\filters\TransformByClipboardMap_ParserComponent.cs" />
+    <Compile Include="src\transformation2\filters\FilterAddPrefix_Operation.cs" />
+    <Compile Include="src\transformation2\filters\FilterAddPrefix_ParserComponent.cs" />
+    <Compile Include="src\transformation2\filters\FilterResolveHtmlEntities_Operation.cs" />
+    <Compile Include="src\transformation2\filters\FilterResolveHtmlEntities_ParserComponent.cs" />
+    <Compile Include="src\transformation2\impl\Script.cs" />
+    <Compile Include="src\transformation2\operations\AppendTokenToAttributeAtNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\AppendTokenToAttributeAtNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\AddChildrenAtLastNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\AddChildrenAtLastNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\SetChildrenAtLastNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\SetChildrenAtLastNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\EnumerateNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\EnumerateNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\CreateNewChildNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\CreateNewChildNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\ScriptRuntimeContext.cs" />
+    <Compile Include="src\transformation2\DefaultParsingContext.cs" />
+    <Compile Include="src\transformation2\filters\AbstractFilter.cs" />
+    <Compile Include="src\transformation2\filters\AbstractFilterParserComponent.cs" />
+    <Compile Include="src\transformation2\filters\IFilters.cs" />
+    <Compile Include="src\transformation2\filters\FilterByRegex_Operation.cs" />
+    <Compile Include="src\transformation2\filters\FilterByRegex_ParserComponent.cs" />
+    <Compile Include="src\transformation2\ILanguageStrategy.cs" />
+    <Compile Include="src\transformation2\impl\AbstractComponentBasedParser.cs" />
+    <Compile Include="src\transformation2\impl\AbstractScriptCommand.cs" />
+    <Compile Include="src\transformation2\impl\CommandSequenceCommand.cs" />
+    <Compile Include="src\transformation2\impl\FilterParser.cs" />
+    <Compile Include="src\transformation2\impl\SimpleProcedure.cs" />
+    <Compile Include="src\transformation2\impl\SubtreeCommandSingle.cs" />
+    <Compile Include="src\transformation2\impl\ExtraCommandsParser.cs" />
+    <Compile Include="src\transformation2\impl\IParserComponent.cs" />
+    <Compile Include="src\transformation2\impl\OperationsParser.cs" />
+    <Compile Include="src\transformation2\impl\ParsingUtils.cs" />
+    <Compile Include="src\transformation2\impl\ProcessingUtils.cs" />
+    <Compile Include="src\transformation2\operations\AddAsTextAtLastNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\AddAsTextAtLastNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\Invoke_Operation.cs" />
+    <Compile Include="src\transformation2\operations\Invoke_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\SetAsAttributeAtLastNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\SetAsAttributeAtLastNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\SetAsTextAtLastNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\SetAsTextAtLastNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\MoveTo_Operation.cs" />
+    <Compile Include="src\transformation2\operations\MoveTo_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RemoveNodeMergeChildElements_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveNodeMergeChildElements_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\InjectParentNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\InjectParentNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\GroupNodeSequences_Operation.cs" />
+    <Compile Include="src\transformation2\operations\GroupNodeSequences_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\GroupNodes_Operation.cs" />
+    <Compile Include="src\transformation2\operations\GroupNodes_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\IOperations.cs" />
+    <Compile Include="src\transformation2\operations\RemoveEmptyText_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveEmptyText_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\Noop_Operation.cs" />
+    <Compile Include="src\transformation2\operations\Noop_ParserComponent.cs" />
+    <Compile Include="src\transformation2\ScriptCompiler.cs" />
+    <Content Include="src\transformation2\filters\README.txt" />
+    <Content Include="src\transformation2\ScriptCompiler.GRAMMAR.txt" />
+    <Compile Include="src\transformation2\impl\SelectorBasedScriptCommand.cs" />
+    <Compile Include="src\transformation2\impl\SubtreeCommandMultiple.cs" />
+    <Compile Include="src\transformation2\IParsingContext.cs" />
+    <Compile Include="src\transformation2\operations\AbstractOperation.cs" />
+    <Compile Include="src\transformation2\operations\AbstractOperationParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\ConvertTextToLowerCase_Operation.cs" />
+    <Compile Include="src\transformation2\operations\ConvertTextToLowerCase_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\ConvertTextToUpperCase_Operation.cs" />
+    <Compile Include="src\transformation2\operations\ConvertTextToUpperCase_ParserComponent.cs" />
+    <Content Include="src\transformation2\operations\README.txt" />
+    <Compile Include="src\transformation2\operations\SetAttribute_Operation.cs" />
+    <Compile Include="src\transformation2\operations\SetAttribute_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RenameNodeByAttributeValue_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RenameNodeByAttributeValue_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RenameNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RenameNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RenameAttribute_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RenameAttribute_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\Remove_Operation.cs" />
+    <Compile Include="src\transformation2\operations\Remove_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RemoveEmptyChildNodes_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveEmptyChildNodes_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAllChildNodes_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAllChildNodes_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAllChildTexts_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAllChildTexts_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAllChildren_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAllChildren_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAllAttributes_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAllAttributes_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAttributes_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveAttributes_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\MergeTextChunks_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveTextSpacesBeforeDelimiters_Operation.cs" />
+    <Compile Include="src\transformation2\operations\RemoveTextSpacesBeforeDelimiters_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\TrimText_Operation.cs" />
+    <Compile Include="src\transformation2\operations\TrimText_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\NormalizeTextSpaces_Operation.cs" />
+    <Compile Include="src\transformation2\operations\NormalizeTextSpaces_ParserComponent.cs" />
+    <Compile Include="src\transformation2\IScript.cs" />
+    <Compile Include="src\transformation2\ScriptManager.cs" />
+    <Compile Include="src\transformation2\impl\ScriptTokenProvider.cs" />
+    <Compile Include="src\transformation2\impl\SelectorParser.cs" />
+    <Compile Include="src\transformation2\selectors\AbstractSelector.cs" />
+    <Compile Include="src\transformation2\selectors\AbstractSelectorParserComponent.cs" />
+    <Compile Include="src\transformation2\EnumDataType.cs" />
+    <Content Include="src\transformation2\selectors\README.txt" />
+    <Compile Include="src\transformation2\operations\MergeTextChunks_ParserComponent.cs" />
+    <Compile Include="src\transformation2\selectors\SelectAllNodeChildren_ParserComponent.cs" />
+    <Compile Include="src\transformation2\selectors\SelectAllNodeChildren_Selector.cs" />
+    <Compile Include="src\transformation2\selectors\ISelectors.cs" />
+    <Compile Include="src\transformation2\selectors\SelectSingleNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\selectors\SelectSingleAttribute_ParserComponent.cs" />
+    <Compile Include="src\transformation2\selectors\SelectSingleText_ParserComponent.cs" />
+    <Compile Include="src\transformation2\selectors\SelectAllTexts_ParserComponent.cs" />
+    <Compile Include="src\transformation2\selectors\SelectAllNodes_ParserComponent.cs" />
+    <Compile Include="src\transformation2\selectors\SelectAllAttributes_ParserComponent.cs" />
+    <Compile Include="src\transformation2\selectors\SelectAllNodes_Selector.cs" />
+    <Compile Include="src\transformation2\selectors\SelectAllTexts_Selector.cs" />
+    <Compile Include="src\transformation2\selectors\SelectSingleNode_Selector.cs" />
+    <Compile Include="src\transformation2\selectors\SelectSingleText_Selector.cs" />
+    <Compile Include="src\transformation2\selectors\SelectAllAttributes_Selector.cs" />
+    <Compile Include="src\transformation2\selectors\SelectSingleAttribute_Selector.cs" />
+    <Compile Include="src\transformation2\ScriptException.cs" />
+    <Compile Include="src\transformation2\TransformationRuleContext.cs" />
+    <Compile Include="src\treesearch\EnumElementType.cs" />
+    <Compile Include="src\util\StringSet.cs" />
+    <Compile Include="src\treesearch\AbstractTreeNodeVisitor.cs" />
+    <Compile Include="src\treesearch\AbstractTreeNodeMatcher.cs" />
+    <Compile Include="src\treesearch\AttributeMatcher.cs" />
+    <Compile Include="src\util\AbstractStack.cs" />
+    <Compile Include="src\treesearch\AbstractPathStack.cs" />
+    <Compile Include="src\treesearch\AttributeVisitor.cs" />
+    <Compile Include="src\treesearch\ChainElement.cs" />
+    <Compile Include="src\treesearch\RecursiveAnyNodeVisitor.cs" />
+    <Compile Include="src\treesearch\HExpressionCompiler.cs" />
+    <Compile Include="src\treesearch\HExpressionCompiler.utils.cs" />
+    <Compile Include="src\treesearch\MatchResultGroup.cs" />
+    <Compile Include="src\treesearch\TreeTextMatcher.cs" />
+    <Compile Include="src\treesearch\HPathWithIndices.cs" />
+    <Compile Include="src\treesearch\DirectNodeVisitor.cs" />
+    <Compile Include="src\treesearch\DirectChildVisitor.cs" />
+    <Compile Include="src\treesearch\HPath.cs" />
+    <Compile Include="src\treesearch\MatchResult.cs" />
+    <Compile Include="src\treesearch\MatchingRecord.cs" />
+    <Compile Include="src\treesearch\PathStruct.cs" />
+    <Compile Include="src\treesearch\RecursiveChildVisitor.cs" />
+    <Compile Include="src\treesearch\TreeElementMatcher.cs" />
+    <Compile Include="src\treesearch\HExpression.cs" />
+    <Content Include="src\README.txt" />
+    <Compile Include="src\simplexml\EnumVisitReturnCode.cs" />
+    <Compile Include="src\simplexml\ExpressionCompilerException.cs" />
+    <Compile Include="src\simplexml\HAbstractElement.cs" />
+    <Compile Include="src\simplexml\HAbstractElementList.cs" />
+    <Compile Include="src\simplexml\HAttribute.cs" />
+    <Compile Include="src\simplexml\HAttributeList.cs" />
+    <Compile Include="src\simplexml\HElement.cs" />
+    <Compile Include="src\simplexml\HText.cs" />
+    <Compile Include="src\simplexml\HToolkit.cs" />
+    <Compile Include="src\simplexml\IHVisitor.cs" />
+    <Compile Include="src\simplexml\IHVisitorCTX.cs" />
+    <Compile Include="src\TagObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\backgroundtasks\BackgroundTaskLabel.resx">
+      <DependentUpon>BackgroundTaskLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\backgroundtasks\BackgroundTaskList.resx">
+      <DependentUpon>BackgroundTaskList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\ScriptEditorControl.resx">
+      <DependentUpon>ScriptEditorControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\SimpleTreeVisualizer.resx">
+      <DependentUpon>SimpleTreeVisualizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\SourceCodeTextControl.resx">
+      <DependentUpon>SourceCodeTextControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\TransformHierarchicalDocumentForm.resx">
+      <DependentUpon>TransformHierarchicalDocumentForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

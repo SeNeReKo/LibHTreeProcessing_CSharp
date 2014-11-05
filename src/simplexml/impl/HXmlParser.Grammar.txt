@@ -1,0 +1,70 @@
+﻿Example:
+
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- CONVERTED FROM DATABASE BY JBTS -->
+<!DOCTYPE EgyTxtCorpus SYSTEM "BTSTEXTCORPUS.DTD" []>
+<EgyTxtCorpus DTDVersion="0.0">
+<text>Hier ein Text mit "&quot;Quotes&quot;" verschiedenen W&ouml;rtern &amp; &lt;Entities&gt;</text>
+</EgyTxtCorpus>
+
+
+
+
+XML		==>		XML_HEADER	OPTIONAL_IRRELEVANT_WHITESPACES		XMLTOKEN
+		|		XML_HEADER	OPTIONAL_IRRELEVANT_WHITESPACES		XML_DOCTYPEDEFS		OPTIONAL_IRRELEVANT_WHITESPACES		XML_TOKEN
+
+
+XML_DOCTYPEDEFS	==>	DOCTYPE
+				|	DOCTYPE	OPTIONAL_WHITESPACES	XML_DOCTYPEDEFS	
+
+XML_HEADER	==>		"<"		"?"		"xml"	OPTIONAL_IRRELEVANT_WHITESPACES		"?"		">"
+			|		"<"		"?"		"xml"	MANDATORY_IRRELEVANT_WHITESPACES		XML_ATTRIBUTE_LIST		OPTIONAL_IRRELEVANT_WHITESPACES		"?"		">"
+
+
+XML_ATTRIBUTE_LIST	==>		XML_ATTRIBUTE
+					|		XML_ATTRIBUTE		MANDATORY_IRRELEVANT_WHITESPACES	XML_ATTRIBUTE_LIST
+
+
+XML_ATTRIBUTE	==>		word	OPTIONAL_WHITESPACES	"="		OPTIONAL_WHITESPACES	string
+
+
+XML_TOKEN	==>	XML_BEGINENDTOKEN
+			| XML_BEGIN_TOKEN[word]		XML_CONTENT		XML_END_TOKEN[constraint: must be the same word]
+
+
+XML_BEGINENDTOKEN	==>	"<"		word	OPTIONAL_IRRELEVANT_WHITESPACES		">"
+					|	"<"		word	MANDATORY_IRRELEVANT_WHITESPACES		XML_ATTRIBUTE_LIST		OPTIONAL_IRRELEVANT_WHITESPACES		">"
+
+XML_BEGINTOKEN	==>	"<"		word	OPTIONAL_IRRELEVANT_WHITESPACES		">"
+				|	"<"		word	MANDATORY_IRRELEVANT_WHITESPACES		XML_ATTRIBUTE_LIST		OPTIONAL_IRRELEVANT_WHITESPACES		"/"		">"
+
+XML_ENDTOKEN	==>	"<"		word	OPTIONAL_IRRELEVANT_WHITESPACES		"/"		">"
+
+
+XML_CONTENT		==>		XML_TOKEN
+				|		XML_COMMENT
+				|		XML_TEXT
+				|		XML_TOKEN		XML_CONTENT
+				|		XML_COMMENT		XML_CONTENT
+				|		XML_TEXT		XML_CONTENT
+
+
+XML_TEXT	==>		arbitrary text, including line breaks, excluding '<', '>'
+
+COMMENT		==>		"<"	"!"	"-"	"-"		ANY_TOKENS_EXCEPT_END_OF_COMMENT	"-"	"-"	">"
+
+DOCTYPE		==>		"<"	"!"	"DOCTYPE"	ANY_TOKENS_EXCEPT_CLOSING_BRACKET	">"
+
+
+MANDATORY_IRRELEVANT_WHITESPACES	==> there must be at least a single whitespace, and this whitespace has no semantic meaning within the data respresented
+									| comments are considered to be whitespaces in this case
+									
+OPTIONAL_IRRELEVANT_WHITESPACES		==> there might be a whitespace, and this whitespace has no semantic meaning within the data respresented
+									| comments are considered to be whitespaces in this case
+
+
+
+
+
+
+

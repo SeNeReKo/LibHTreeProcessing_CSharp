@@ -1,0 +1,63 @@
+﻿################################################################################################################################
+#### Grammar
+
+
+INIT			->	COMMANDS	EOLS
+
+COMMANDS		->	EOLS	CMD
+				|	EOLS	CMD		COMMANDS
+
+COMMANDBLOCK	->	"{"	EOLS	COMMANDS	"}"
+
+CMDFILTEROP		->	filter		REDIRECT		operation
+				|	filter
+
+CMD				->	extra_command	EOLS
+				|	selector	REDIRECT	operation	EOLS
+				|	selector	REDIRECT	filter	REDIRECT	operation	EOLS
+				|	"select"	"subtrees"	path	COMMANDBLOCK	EOLS
+				|	"select"	"single"	"subtree"	path	COMMANDBLOCK	EOLS
+				|	PROCEDUREDEF	EOLS
+				
+				
+PROCEDUREDEF	->	"procedure"		procedureName	"("		"node"	")"		COMMANDBLOCK
+				|	"procedure"		procedureName	"("		"node"	")"		EOLS	COMMANDBLOCK
+
+
+REDIRECT		->	">>>>"
+				|	">>"
+
+
+EOLS			->	eol
+				|	eol	EOLS
+
+
+################################################################################################################################
+#### Example
+
+
+select subtree "/path" {
+	cmd
+	selector >>>> operation
+	selector >> operation
+}
+cmd
+selector >> operation
+selector >>>> filter >> operation
+
+define function myParameterlessFunction() {
+	selector >> operation
+}
+
+define function myFunctionWithParameterA(text chunk) {
+	selector >> operation
+}
+
+define function myFunctionWithParameterB(node) {
+	selector >> operation
+}
+
+call myParameterlessFunction()
+
+selector >> call myFunctionWithParameterB(node);
+
