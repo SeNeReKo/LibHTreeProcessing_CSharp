@@ -48,6 +48,15 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator moves the element received to the node specified. The elements moved can be of any type."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

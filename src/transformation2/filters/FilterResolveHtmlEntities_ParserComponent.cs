@@ -48,6 +48,15 @@ namespace LibHTreeProcessing.src.transformation2.filters
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This filter tries to resolve HTML entities by converting them to standard unicode characers and character sequences."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

@@ -49,6 +49,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will reveive either text chunks or attributes. It will use that data as a value: It will select the last node as specified,"
+					+ " clear all text from it and then add a new text chunk containing that value."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

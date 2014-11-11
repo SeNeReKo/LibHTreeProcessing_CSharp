@@ -4,25 +4,16 @@ using System.Linq;
 using System.Text;
 
 
-namespace LibHTreeProcessing.src.transformation2.filters
+namespace LibHTreeProcessing.src.transformation2.impl
 {
 
-	public static class IFilters
+	public class TransformationRuleParserComponentSorter<T> : IComparer<IParserComponent<T>>
+			where T : class
 	{
 
 		////////////////////////////////////////////////////////////////
 		// Constants
 		////////////////////////////////////////////////////////////////
-
-		public static readonly Type[] ALL_PARSER_COMPONENT_TYPES = new Type[] {
-			typeof(FilterAddPrefix_ParserComponent),
-			typeof(FilterByRegex_ParserComponent),
-			typeof(FilterResolveHtmlEntities_ParserComponent),
-			typeof(FilterConvertToLowerCase_ParserComponent),
-			typeof(FilterConvertToUpperCase_ParserComponent),
-			typeof(TransformByClipboardMap_ParserComponent),
-			typeof(TransformEntitiesByClipboardMap_ParserComponent),
-		};
 
 		////////////////////////////////////////////////////////////////
 		// Variables
@@ -32,6 +23,10 @@ namespace LibHTreeProcessing.src.transformation2.filters
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
+		public TransformationRuleParserComponentSorter()
+		{
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Properties
 		////////////////////////////////////////////////////////////////
@@ -40,6 +35,23 @@ namespace LibHTreeProcessing.src.transformation2.filters
 		// Methods
 		////////////////////////////////////////////////////////////////
 
+		public int Compare(IParserComponent<T> x, IParserComponent<T> y)
+		{
+			string xx = __Join(x.ShortHelp);
+			string yy = __Join(y.ShortHelp);
+			return xx.CompareTo(yy);
+		}
+
+		private static string __Join(string[] list)
+		{
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < list.Length; i++) {
+				if (i > 0)
+					sb.Append(' ');
+				sb.Append(list[i].Trim());
+			}
+			return sb.ToString();
+		}
 	}
 
 }

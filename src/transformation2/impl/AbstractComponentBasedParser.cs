@@ -74,7 +74,28 @@ namespace LibHTreeProcessing.src.transformation2.impl
 		public virtual string[] ShortHelp
 		{
 			get {
-				return null;	// TODO
+				return null;
+			}
+		}
+
+		public virtual EnumDataType[] ValidInputDataTypes
+		{
+			get {
+				return null;
+			}
+		}
+
+		public virtual EnumDataType[] OutputDataTypes
+		{
+			get {
+				return null;
+			}
+		}
+
+		public virtual string[] LongHelpText
+		{
+			get {
+				return null;
 			}
 		}
 

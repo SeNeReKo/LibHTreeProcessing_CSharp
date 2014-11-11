@@ -50,6 +50,15 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator creates copies for the data received and writes it to the clipboard at the specified position."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

@@ -46,6 +46,17 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This command clones a single node exactly at the position the selected node resides. To distinguish the clones"
+					+ " a set of attributes is used: Each clone will receive one of the attributes specified. The number of clones"
+					+ " that will be created depend on the specified number of attributes."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

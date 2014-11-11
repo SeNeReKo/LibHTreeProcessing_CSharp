@@ -50,6 +50,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator moves all data from the clipboard at the specified position to the node received. All attributes,"
+					+ " text chunks and child nodes are moved. After that operation they will no longer reside in the clipboard."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

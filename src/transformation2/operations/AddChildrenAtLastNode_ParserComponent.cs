@@ -49,6 +49,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will select the last node (with the specified name) and add text chunks and nodes to it. These text chunks and nodes"
+					+ " will be created as clones from the children of the node received."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

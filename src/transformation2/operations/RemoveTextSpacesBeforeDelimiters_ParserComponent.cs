@@ -48,6 +48,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will modify the text elements received. It will tokenize the text in the text chunk and eliminate duplicate"
+					+ " space characters before the specified delimiters."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

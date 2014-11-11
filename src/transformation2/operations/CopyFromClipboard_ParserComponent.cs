@@ -50,6 +50,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator copies all data from the clipboard at the specified position (as clones) to the node received. All attributes,"
+					+ " text chunks and child nodes are copied."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

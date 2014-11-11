@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LibLightweightGUI">
+      <HintPath>..\..\..\LibLightweightGUI\LibLightweightGUI\bin\Debug\LibLightweightGUI.dll</HintPath>
+    </Reference>
     <Reference Include="LibNLPCSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Proj\NLPCSharp\NLPCSharp\bin\Debug\LibNLPCSharp.dll</HintPath>
@@ -139,6 +142,12 @@
     <Compile Include="src\stringmatching\StringMatcherEquals.cs" />
     <Compile Include="src\stringmatching\StringMatcherStartsWith.cs" />
     <Compile Include="src\transformation2\cmds\AbstractScriptCommandParserComponent.cs" />
+    <Compile Include="src\transformation2\filters\FilterConvertToLowerCase_Operation.cs" />
+    <Compile Include="src\transformation2\filters\FilterConvertToLowerCase_ParserComponent.cs" />
+    <Compile Include="src\transformation2\filters\FilterConvertToUpperCase_Operation.cs" />
+    <Compile Include="src\transformation2\filters\FilterConvertToUpperCase_ParserComponent.cs" />
+    <Compile Include="src\transformation2\HelpTextBuilder.cs" />
+    <Compile Include="src\transformation2\impl\TransformationRuleParserComponentSorter.cs" />
     <Compile Include="src\transformation2\operations\CloneNode_ParserComponent.cs" />
     <Compile Include="src\transformation2\operations\CloneNode_Operation.cs" />
     <Compile Include="src\transformation2\operations\SetAsTextAtNode_Operation.cs" />

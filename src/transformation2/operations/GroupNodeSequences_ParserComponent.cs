@@ -48,6 +48,17 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator processes the child nodes of the nodes received: Consecuting child nodes are grouped together as children of a"
+					+ " new node which will then replace the nodes selected. This operator can only process nodes: Text elements will be considered"
+					+ " as \"aliens\" and will interrupt any node sequence."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

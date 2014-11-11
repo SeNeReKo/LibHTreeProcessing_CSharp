@@ -49,6 +49,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will identify the last node as specied, remove all children (= text chunks and nodes) of that node,"
+					+ " and then populate this node with clones of all children of the node received."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

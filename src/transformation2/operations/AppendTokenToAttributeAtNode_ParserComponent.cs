@@ -49,6 +49,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will select the specified attribute from the node specified. (If no such attribute exists, a new one is created.)"
+					+ " Then this operator will add a token to the attribute value using the data received."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

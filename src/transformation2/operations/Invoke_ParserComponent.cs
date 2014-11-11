@@ -48,6 +48,17 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will invoke the procedure specified. While doing so the selected node will be considered to be a"
+					+ " (virtual) root node: The procedure will not see any nodes above the selected node."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

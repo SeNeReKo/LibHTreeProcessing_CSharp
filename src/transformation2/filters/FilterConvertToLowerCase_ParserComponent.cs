@@ -12,10 +12,10 @@ using LibHTreeProcessing.src.treesearch;
 using LibHTreeProcessing.src.transformation2.impl;
 
 
-namespace LibHTreeProcessing.src.transformation2.operations
+namespace LibHTreeProcessing.src.transformation2.filters
 {
 
-	public class RemoveAllChildren_ParserComponent : AbstractOperationParserComponent
+	public class FilterConvertToLowerCase_ParserComponent : AbstractFilterParserComponent
 	{
 
 		////////////////////////////////////////////////////////////////
@@ -30,8 +30,8 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
-		public RemoveAllChildren_ParserComponent()
-			: base(EnumDataType.SingleNode)
+		public FilterConvertToLowerCase_ParserComponent()
+			: base(EnumDataType.SingleText, EnumDataType.SingleAttribute)
 		{
 		}
 
@@ -43,7 +43,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		{
 			get {
 				return new string[] {
-					"remove all children"
+					"filter convert to lower case"
 				};
 			}
 		}
@@ -52,7 +52,8 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		{
 			get {
 				return new string[] {
-					"This operator will remove all child nodes and child text chunks of the nodes received. Only attributes will remain untouched."
+					"Letter by letter this filter will convert the text received to lower case. A new item of the same input type (with lower case"
+					+ " data) is created and returned."
 				};
 			}
 		}
@@ -61,20 +62,22 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		// Methods
 		////////////////////////////////////////////////////////////////
 
-		public override AbstractOperation TryParse(IParsingContext ctx, TokenStream tokens)
+		public override AbstractFilter TryParse(IParsingContext ctx, TokenStream tokens)
 		{
 			int lineNo = tokens.LineNumber;
 
 			Token[] tokensMatched;
 
 			if ((tokensMatched = tokens.TryEatSequence(
-				TokenPattern.MatchWord("remove"),
-				TokenPattern.MatchWord("all"),
-				TokenPattern.MatchWord("children")
+				TokenPattern.MatchWord("filter"),
+				TokenPattern.MatchWord("convert"),
+				TokenPattern.MatchWord("to"),
+				TokenPattern.MatchWord("lower"),
+				TokenPattern.MatchWord("case")
 				)) == null)
 				return null;
 
-			return new RemoveAllChildren_Operation(lineNo);
+			return new FilterConvertToLowerCase_Operation(lineNo);
 		}
 
 	}

@@ -50,6 +50,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator moved the data received to the clipboard at the specified position. The data to move can be any kind of"
+					+ " data. Please have in mind that after that operation this data will no longer be contained in the node received."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

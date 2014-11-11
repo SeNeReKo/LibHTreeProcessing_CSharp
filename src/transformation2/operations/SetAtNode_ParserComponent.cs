@@ -48,6 +48,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This command will select the specified node, and will then set an attribute or text at that node, overwriting possibly"
+					+ " existing data. The data value of that attribute or text will be created from the data received from a selector."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

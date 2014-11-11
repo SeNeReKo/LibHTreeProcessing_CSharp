@@ -39,6 +39,21 @@ namespace LibHTreeProcessing.src.transformation2.impl
 			get;
 		}
 
+		EnumDataType[] ValidInputDataTypes
+		{
+			get;
+		}
+
+		EnumDataType[] OutputDataTypes
+		{
+			get;
+		}
+
+		string[] LongHelpText
+		{
+			get;
+		}
+
 		T TryParse(IParsingContext ctx, TokenStream tokens);
 
 	}

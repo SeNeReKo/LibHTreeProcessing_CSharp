@@ -43,7 +43,17 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		{
 			get {
 				return new string[] {
-					"convert to lower case"
+					"convert to upper case"
+				};
+			}
+		}
+
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"Letter by letter this operator will convert the text received to upper case. The existing data will be"
+					+ " replaced by an upper case version."
 				};
 			}
 		}

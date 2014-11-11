@@ -48,6 +48,16 @@ namespace LibHTreeProcessing.src.transformation2.filters
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This filter will transform the text chunk or attribute received. It does this by using the data as a key in the"
+					+ " map stored in the clipboard at the specified position."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

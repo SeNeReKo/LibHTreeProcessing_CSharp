@@ -31,7 +31,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		////////////////////////////////////////////////////////////////
 
 		public RenameNode_ParserComponent()
-			: base(EnumDataType.SingleText)
+			: base(EnumDataType.SingleNode)
 		{
 		}
 
@@ -44,6 +44,15 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			get {
 				return new string[] {
 					"rename node to \"newName\""
+				};
+			}
+		}
+
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will modify the nodes received and rename them to the name specified."
 				};
 			}
 		}

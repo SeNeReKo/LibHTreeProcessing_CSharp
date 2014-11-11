@@ -31,7 +31,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		////////////////////////////////////////////////////////////////
 
 		public RenameAttribute_ParserComponent()
-			: base(EnumDataType.SingleText)
+			: base(EnumDataType.SingleAttribute)
 		{
 		}
 
@@ -44,6 +44,15 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			get {
 				return new string[] {
 					"rename attribute to \"newName\""
+				};
+			}
+		}
+
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will modify the attributes received and rename them to the name specified."
 				};
 			}
 		}

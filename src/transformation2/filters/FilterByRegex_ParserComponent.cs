@@ -49,6 +49,18 @@ namespace LibHTreeProcessing.src.transformation2.filters
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This filter tries to match the received value of a text chunk or attribute by the specified regular expression. The first group"
+					+ " specified in the regular expression will form the new output of the filter. If no such group exists or too many groups are specified "
+					+ " an error will occur at runtime. If no match occurred, there will be no output. If a match occurs, an output element of the same type"
+					+ " as the input element will be created."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

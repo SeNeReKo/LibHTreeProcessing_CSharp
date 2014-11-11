@@ -48,6 +48,16 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will reveive either text chunks or attributes. It will use that data as a value: It will select the node as specified"
+					+ " and then set the specified attribute to that value. If no such attribute yet exists a new one is created."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

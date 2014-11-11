@@ -11,10 +11,12 @@ using System.Xml;
 
 
 using LibNLPCSharp.util;
-using LibHTreeProcessing.src.simplexml;
 using LibNLPCSharp.simpletokenizing;
 using LibNLPCSharp.gui;
 
+using LibLightweightGUI.src.textmodel;
+
+using LibHTreeProcessing.src.simplexml;
 using LibHTreeProcessing.src;
 using LibHTreeProcessing.src.transformation2;
 
@@ -68,7 +70,13 @@ namespace LibHTreeProcessing.src.gui
 
 			edtPath.Text = hierarchyPath;
 
-			__ShowTransformationRulesHelpText();
+			TextModel helpDoc = HelpTextBuilder.CreateHelpText(parser);
+			ModelToLightweightControlConverter.Convert(
+				helpDoc,
+				lwHelp.CreateLayer()
+				);
+			lwHelp[0].DoLayout();
+			string dump = lwHelp.Dump();
 
 			foreach (string fileNameWithoutExt in scriptManager.ScriptFileNames) {
 				TabPage tabPage = new TabPage(fileNameWithoutExt);
@@ -266,17 +274,6 @@ namespace LibHTreeProcessing.src.gui
 				ErrorForm f = new ErrorForm("Failed to save file: " + sfd.FileName, ee);
 				f.ShowDialog();
 			}
-		}
-
-		private void __ShowTransformationRulesHelpText()
-		{
-			StringBuilder sb = new StringBuilder();
-
-			if (parser != null) {
-				sb.Append(parser.ShortHelpText);
-			}
-
-			textBox1.Text = sb.ToString();
 		}
 
 	}

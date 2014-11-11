@@ -31,7 +31,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		////////////////////////////////////////////////////////////////
 
 		public RemoveAllAttributes_ParserComponent()
-			: base(EnumDataType.SingleText)
+			: base(EnumDataType.SingleNode)
 		{
 		}
 
@@ -44,6 +44,15 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			get {
 				return new string[] {
 					"remove all attributes"
+				};
+			}
+		}
+
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will remove all attributes of the nodes received."
 				};
 			}
 		}

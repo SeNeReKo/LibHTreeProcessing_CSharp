@@ -48,6 +48,16 @@ namespace LibHTreeProcessing.src.transformation2.filters
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator splits the text from an text or attribute recieved at entity definitions and replaces these character sequences with"
+					+ " data provided in the clipboard."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

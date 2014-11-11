@@ -49,6 +49,15 @@ namespace LibHTreeProcessing.src.transformation2.cmds
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This command loads (and parses) an XML file and inserts it at the specified position into the clipboard data tree."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

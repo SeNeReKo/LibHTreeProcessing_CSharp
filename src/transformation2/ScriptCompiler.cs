@@ -7,6 +7,8 @@ using System.Text;
 using LibNLPCSharp.simpletokenizing;
 using LibNLPCSharp.util;
 
+using LibLightweightGUI.src.textmodel;
+
 using LibHTreeProcessing.src.treesearch;
 using LibHTreeProcessing.src.transformation2.operations;
 using LibHTreeProcessing.src.transformation2.selectors;
@@ -72,6 +74,34 @@ namespace LibHTreeProcessing.src.transformation2
 		////////////////////////////////////////////////////////////////
 		// Properties
 		////////////////////////////////////////////////////////////////
+
+		public ExtraCommandsParser ExtraCmdsParser
+		{
+			get {
+				return extraCmdsParser;
+			}
+		}
+
+		public SelectorParser SelectorsParser
+		{
+			get {
+				return selectorsParser;
+			}
+		}
+
+		public OperationsParser OperationsParser
+		{
+			get {
+				return operationsParser;
+			}
+		}
+
+		public FilterParser FiltersParser
+		{
+			get {
+				return filtersParser;
+			}
+		}
 
 		public string ShortHelpText
 		{

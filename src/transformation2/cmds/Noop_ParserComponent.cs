@@ -45,6 +45,13 @@ namespace LibHTreeProcessing.src.transformation2.cmds
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] { "No operation. This command does nothing at all." };
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

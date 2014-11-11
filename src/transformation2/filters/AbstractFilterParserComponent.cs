@@ -26,7 +26,8 @@ namespace LibHTreeProcessing.src.transformation2.filters
 		// Variables
 		////////////////////////////////////////////////////////////////
 
-		private EnumDataType[] validInputDataTypes;
+		private readonly EnumDataType[] validInputDataTypes;
+		private readonly EnumDataType[] outputDataType;
 
 		////////////////////////////////////////////////////////////////
 		// Constructors
@@ -37,11 +38,17 @@ namespace LibHTreeProcessing.src.transformation2.filters
 			this.validInputDataTypes = new EnumDataType[1 + additionalValidInputDataTypes.Length];
 			this.validInputDataTypes[0] = validInputDataType;
 			additionalValidInputDataTypes.CopyTo(this.validInputDataTypes, 1);
+			this.outputDataType = validInputDataTypes;
 		}
 
 		////////////////////////////////////////////////////////////////
 		// Properties
 		////////////////////////////////////////////////////////////////
+
+		public abstract string[] ShortHelp
+		{
+			get;
+		}
 
 		public EnumDataType[] ValidInputDataTypes
 		{
@@ -50,7 +57,14 @@ namespace LibHTreeProcessing.src.transformation2.filters
 			}
 		}
 
-		public abstract string[] ShortHelp
+		public virtual EnumDataType[] OutputDataTypes
+		{
+			get {
+				return outputDataType;
+			}
+		}
+
+		public abstract string[] LongHelpText
 		{
 			get;
 		}

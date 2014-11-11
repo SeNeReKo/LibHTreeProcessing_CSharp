@@ -30,20 +30,21 @@
 			this.components = new System.ComponentModel.Container();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.simpleTreeVisualizer1 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tabControl2 = new System.Windows.Forms.TabControl();
-			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.btnTransform = new System.Windows.Forms.Button();
 			this.lblError = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
-			this.simpleTreeVisualizer2 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
+			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.miNew = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.edtPath = new System.Windows.Forms.TextBox();
-			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.lwHelp = new LibLightweightGUI.src.LightweightContainerPanel();
+			this.simpleTreeVisualizer1 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
+			this.simpleTreeVisualizer2 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
 			this.simpleTreeVisualizer3 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -52,9 +53,10 @@
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.tabPage3.SuspendLayout();
+			this.tabPage4.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
-			this.tabPage4.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -80,17 +82,6 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Original";
 			this.tabPage1.UseVisualStyleBackColor = true;
-			// 
-			// simpleTreeVisualizer1
-			// 
-			this.simpleTreeVisualizer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleTreeVisualizer1.Location = new System.Drawing.Point(3, 3);
-			this.simpleTreeVisualizer1.Name = "simpleTreeVisualizer1";
-			this.simpleTreeVisualizer1.RootNode = null;
-			this.simpleTreeVisualizer1.Size = new System.Drawing.Size(938, 569);
-			this.simpleTreeVisualizer1.TabIndex = 0;
 			// 
 			// tabPage2
 			// 
@@ -120,9 +111,9 @@
 			// 
 			// splitContainer1.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.textBox1);
+			this.splitContainer1.Panel2.Controls.Add(this.panel2);
 			this.splitContainer1.Size = new System.Drawing.Size(924, 520);
-			this.splitContainer1.SplitterDistance = 374;
+			this.splitContainer1.SplitterDistance = 342;
 			this.splitContainer1.SplitterWidth = 20;
 			this.splitContainer1.TabIndex = 4;
 			// 
@@ -132,26 +123,9 @@
 			this.tabControl2.Location = new System.Drawing.Point(0, 0);
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
-			this.tabControl2.Size = new System.Drawing.Size(374, 520);
+			this.tabControl2.Size = new System.Drawing.Size(342, 520);
 			this.tabControl2.TabIndex = 2;
 			this.tabControl2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl2_MouseDown);
-			// 
-			// textBox1
-			// 
-			this.textBox1.BackColor = System.Drawing.SystemColors.Window;
-			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBox1.ForeColor = System.Drawing.Color.DimGray;
-			this.textBox1.Location = new System.Drawing.Point(0, 0);
-			this.textBox1.Multiline = true;
-			this.textBox1.Name = "textBox1";
-			this.textBox1.ReadOnly = true;
-			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.textBox1.Size = new System.Drawing.Size(530, 520);
-			this.textBox1.TabIndex = 3;
-			this.textBox1.Text = "Possible transformation rules to use:\r\n\r\n»  group nodes { \"nodeNameA\", \"nodeNameB" +
-    "\", ... } with \"newNodeName\"\r\n»  rename nodes \"oldNodeName\" to \"newNodeName\"";
-			this.textBox1.WordWrap = false;
 			// 
 			// btnTransform
 			// 
@@ -187,14 +161,16 @@
 			this.tabPage3.Text = "Transformation Result";
 			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
-			// simpleTreeVisualizer2
+			// tabPage4
 			// 
-			this.simpleTreeVisualizer2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.simpleTreeVisualizer2.Location = new System.Drawing.Point(3, 3);
-			this.simpleTreeVisualizer2.Name = "simpleTreeVisualizer2";
-			this.simpleTreeVisualizer2.RootNode = null;
-			this.simpleTreeVisualizer2.Size = new System.Drawing.Size(938, 569);
-			this.simpleTreeVisualizer2.TabIndex = 0;
+			this.tabPage4.Controls.Add(this.simpleTreeVisualizer3);
+			this.tabPage4.Location = new System.Drawing.Point(4, 22);
+			this.tabPage4.Name = "tabPage4";
+			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage4.Size = new System.Drawing.Size(944, 575);
+			this.tabPage4.TabIndex = 3;
+			this.tabPage4.Text = "Clipboard";
+			this.tabPage4.UseVisualStyleBackColor = true;
 			// 
 			// contextMenuStrip1
 			// 
@@ -231,16 +207,46 @@
 			this.edtPath.Size = new System.Drawing.Size(939, 13);
 			this.edtPath.TabIndex = 0;
 			// 
-			// tabPage4
+			// panel2
 			// 
-			this.tabPage4.Controls.Add(this.simpleTreeVisualizer3);
-			this.tabPage4.Location = new System.Drawing.Point(4, 22);
-			this.tabPage4.Name = "tabPage4";
-			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage4.Size = new System.Drawing.Size(944, 575);
-			this.tabPage4.TabIndex = 3;
-			this.tabPage4.Text = "Clipboard";
-			this.tabPage4.UseVisualStyleBackColor = true;
+			this.panel2.AutoScroll = true;
+			this.panel2.BackColor = System.Drawing.Color.White;
+			this.panel2.Controls.Add(this.lwHelp);
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel2.Location = new System.Drawing.Point(0, 0);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(562, 520);
+			this.panel2.TabIndex = 0;
+			// 
+			// lwHelp
+			// 
+			this.lwHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lwHelp.Location = new System.Drawing.Point(0, 0);
+			this.lwHelp.Name = "lwHelp";
+			this.lwHelp.Size = new System.Drawing.Size(562, 288);
+			this.lwHelp.TabIndex = 0;
+			this.lwHelp.Text = "lightweightContainerPanel1";
+			// 
+			// simpleTreeVisualizer1
+			// 
+			this.simpleTreeVisualizer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.simpleTreeVisualizer1.Location = new System.Drawing.Point(3, 3);
+			this.simpleTreeVisualizer1.Name = "simpleTreeVisualizer1";
+			this.simpleTreeVisualizer1.RootNode = null;
+			this.simpleTreeVisualizer1.Size = new System.Drawing.Size(938, 569);
+			this.simpleTreeVisualizer1.TabIndex = 0;
+			// 
+			// simpleTreeVisualizer2
+			// 
+			this.simpleTreeVisualizer2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.simpleTreeVisualizer2.Location = new System.Drawing.Point(3, 3);
+			this.simpleTreeVisualizer2.Name = "simpleTreeVisualizer2";
+			this.simpleTreeVisualizer2.RootNode = null;
+			this.simpleTreeVisualizer2.Size = new System.Drawing.Size(938, 569);
+			this.simpleTreeVisualizer2.TabIndex = 0;
 			// 
 			// simpleTreeVisualizer3
 			// 
@@ -266,13 +272,13 @@
 			this.tabPage2.PerformLayout();
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
-			this.splitContainer1.Panel2.PerformLayout();
 			this.splitContainer1.ResumeLayout(false);
 			this.tabPage3.ResumeLayout(false);
+			this.tabPage4.ResumeLayout(false);
 			this.contextMenuStrip1.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
-			this.tabPage4.ResumeLayout(false);
+			this.panel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -285,7 +291,6 @@
 		private System.Windows.Forms.TabPage tabPage3;
 		private System.Windows.Forms.Label lblError;
 		private System.Windows.Forms.Button btnTransform;
-		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.TabControl tabControl2;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem miNew;
@@ -296,5 +301,7 @@
 		private System.Windows.Forms.TextBox edtPath;
 		private System.Windows.Forms.TabPage tabPage4;
 		private SimpleTreeVisualizer simpleTreeVisualizer3;
+		private System.Windows.Forms.Panel panel2;
+		private LibLightweightGUI.src.LightweightContainerPanel lwHelp;
 	}
 }

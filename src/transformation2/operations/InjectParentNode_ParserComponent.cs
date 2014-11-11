@@ -48,6 +48,17 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
+
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will create a new parent node for the node selected. Please have in mind that a root node is a special case:"
+					+ " Root nodes do not have parents. Injection neverless will work for root nodes."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

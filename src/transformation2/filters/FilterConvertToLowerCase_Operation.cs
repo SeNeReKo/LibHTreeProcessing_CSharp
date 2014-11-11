@@ -12,10 +12,10 @@ using LibHTreeProcessing.src.treesearch;
 using LibHTreeProcessing.src.transformation2.impl;
 
 
-namespace LibHTreeProcessing.src.transformation2.operations
+namespace LibHTreeProcessing.src.transformation2.filters
 {
 
-	public class RemoveAllChildren_ParserComponent : AbstractOperationParserComponent
+	public class FilterConvertToLowerCase_Operation : AbstractFilter
 	{
 
 		////////////////////////////////////////////////////////////////
@@ -30,8 +30,12 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
-		public RemoveAllChildren_ParserComponent()
-			: base(EnumDataType.SingleNode)
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="lineNo">Line number of first token from parsing this selector.</param>
+		public FilterConvertToLowerCase_Operation(int lineNo)
+			: base(lineNo)
 		{
 		}
 
@@ -39,44 +43,27 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		// Properties
 		////////////////////////////////////////////////////////////////
 
-		public override string[] ShortHelp
-		{
-			get {
-				return new string[] {
-					"remove all children"
-				};
-			}
-		}
-
-		public override string[] LongHelpText
-		{
-			get {
-				return new string[] {
-					"This operator will remove all child nodes and child text chunks of the nodes received. Only attributes will remain untouched."
-				};
-			}
-		}
-
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////
 
-		public override AbstractOperation TryParse(IParsingContext ctx, TokenStream tokens)
+		public override HAbstractElement Process(TransformationRuleContext ctx, ScriptRuntimeContext dataCtx, HPathWithIndices currentPath, HAbstractElement currentElement)
 		{
-			int lineNo = tokens.LineNumber;
+			if (currentElement is HText) {
+				HText t = (HText)currentElement;
+				HText t2 = new HText(t.Text.ToLower());
+				return t2;
+			} else
+			if (currentElement is HAttribute) {
+				HAttribute a = (HAttribute)currentElement;
+				HAttribute a2 = new HAttribute(a.Name, a.Value.ToLower());
+				return a2;
+			} else
+				throw ScriptException.CreateError_Unknown(LineNumber, "Data is neither text nor attribute!");
 
-			Token[] tokensMatched;
-
-			if ((tokensMatched = tokens.TryEatSequence(
-				TokenPattern.MatchWord("remove"),
-				TokenPattern.MatchWord("all"),
-				TokenPattern.MatchWord("children")
-				)) == null)
-				return null;
-
-			return new RemoveAllChildren_Operation(lineNo);
+			// return null;
 		}
-
+		
 	}
 
 }

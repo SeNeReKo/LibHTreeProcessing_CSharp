@@ -47,6 +47,24 @@ namespace LibHTreeProcessing.src.transformation2.selectors
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will select all text chunks and child nodes according to the path specified."
+				};
+			}
+		}
+
+		public override EnumDataType[] OutputDataTypes
+		{
+			get {
+				return new EnumDataType[] {
+					EnumDataType.SingleNode, EnumDataType.SingleText
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

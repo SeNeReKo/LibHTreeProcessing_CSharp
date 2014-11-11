@@ -31,7 +31,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		////////////////////////////////////////////////////////////////
 
 		public RemoveEmptyChildNodes_ParserComponent()
-			: base(EnumDataType.SingleText)
+			: base(EnumDataType.SingleNode)
 		{
 		}
 
@@ -44,6 +44,17 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			get {
 				return new string[] {
 					"remove empty child nodes"
+				};
+			}
+		}
+
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This operator will scan the cildren of the nodes received for empty nodes and empty text chunks. If found these elements"
+					+ " will be removed. Text chunks are considered to be empty if they contain text data of length zero. Nodes are considered"
+					+ " to be empty if they contain no attributes and no children."
 				};
 			}
 		}

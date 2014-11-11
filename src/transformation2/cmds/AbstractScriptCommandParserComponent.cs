@@ -43,6 +43,26 @@ namespace LibHTreeProcessing.src.transformation2.cmds
 			get;
 		}
 
+
+		public EnumDataType[] ValidInputDataTypes
+		{
+			get {
+				return new EnumDataType[0];
+			}
+		}
+
+		public EnumDataType[] OutputDataTypes
+		{
+			get {
+				return new EnumDataType[0];
+			}
+		}
+
+		public abstract string[] LongHelpText
+		{
+			get;
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

@@ -48,6 +48,16 @@ namespace LibHTreeProcessing.src.transformation2.filters
 			}
 		}
 
+		public override string[] LongHelpText
+		{
+			get {
+				return new string[] {
+					"This filter adds a static prefix text to the item received. A new item of the same type containing the modified text"
+					+ " is created and returned."
+				};
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////

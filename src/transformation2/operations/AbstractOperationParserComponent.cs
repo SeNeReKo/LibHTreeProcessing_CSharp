@@ -43,6 +43,11 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		// Properties
 		////////////////////////////////////////////////////////////////
 
+		public abstract string[] ShortHelp
+		{
+			get;
+		}
+
 		public EnumDataType[] ValidInputDataTypes
 		{
 			get {
@@ -50,7 +55,14 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			}
 		}
 
-		public abstract string[] ShortHelp
+		public EnumDataType[] OutputDataTypes
+		{
+			get {
+				return new EnumDataType[0];
+			}
+		}
+
+		public abstract string[] LongHelpText
 		{
 			get;
 		}
