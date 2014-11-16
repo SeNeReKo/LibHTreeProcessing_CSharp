@@ -19,17 +19,24 @@ namespace LibHTreeProcessing.src.backgroundtasks
 			private BackgroundTaskList parent;
 
 			internal List<IBackgroundTask> tasks;
-
+			internal Dictionary<IBackgroundTask, BackgroundTaskLabel> taskCollection;
+			internal Dictionary<IBackgroundTask, double> progressCollection;
+			
 			internal TaskList(BackgroundTaskList parent)
 			{
 				this.parent = parent;
 
+				progressCollection = new Dictionary<IBackgroundTask, double>();
+				taskCollection = new Dictionary<IBackgroundTask, BackgroundTaskLabel>();
 				tasks = new List<IBackgroundTask>();
 			}
 
 			public void Add(IBackgroundTask task)
 			{
 				tasks.Add(task);
+				progressCollection.Add(task, 0);
+				taskCollection.Add(task, null);
+				task.OnProgress += new OnTaskProgressDelegate(task_OnProgress);
 
 				parent.__Refill();
 			}
@@ -37,6 +44,8 @@ namespace LibHTreeProcessing.src.backgroundtasks
 			public void Remove(IBackgroundTask task)
 			{
 				tasks.Remove(task);
+				taskCollection.Remove(task);
+				progressCollection.Remove(task);
 
 				parent.__Refill();
 			}
@@ -56,6 +65,20 @@ namespace LibHTreeProcessing.src.backgroundtasks
 
 				parent.__Refill();
 			}
+
+			private void task_OnProgress(IBackgroundTask task, double progress)
+			{
+				progressCollection.Remove(task);
+				progressCollection.Add(task, progress);
+
+				BackgroundTaskLabel label;
+				if (taskCollection.TryGetValue(task, out label)) {
+					label.Progress = progress;
+				} else {
+					parent.__Refill();
+				}
+			}
+
 		}
 
 		////////////////////////////////////////////////////////////////
@@ -96,9 +119,12 @@ namespace LibHTreeProcessing.src.backgroundtasks
 		{
 			Controls.Clear();
 			int x = 0;
+			Tasks.taskCollection.Clear();
 			foreach (IBackgroundTask task in Tasks.tasks) {
 				BackgroundTaskLabel label = new BackgroundTaskLabel(task);
+				label.Progress = Tasks.progressCollection[task];
 				label.Location = new Point(x, 0);
+				Tasks.taskCollection.Add(task, label);
 				x += label.Size.Width;
 				Controls.Add(label);
 			}

@@ -7,13 +7,8 @@ using System.Text;
 namespace LibHTreeProcessing.src.backgroundtasks
 {
 
-	public interface IBackgroundTask
+	public interface IProgressIndicator
 	{
-
-		event OnBackgroundTaskDelegate OnBackgroundTaskStarted;
-		event OnBackgroundTaskDelegate OnBackgroundTaskCompleted;
-
-		event OnTaskProgressDelegate OnProgress;
 
 		////////////////////////////////////////////////////////////////
 		// Constants
@@ -31,38 +26,13 @@ namespace LibHTreeProcessing.src.backgroundtasks
 		// Properties
 		////////////////////////////////////////////////////////////////
 
-		ArgumentDescription[] ArgumentDescriptions
-		{
-			get;
-		}
-
-		StringBuilder Output
-		{
-			get;
-		}
-
-		Exception Error
-		{
-			get;
-		}
-
-		string Name
-		{
-			get;
-		}
-
-		EnumBackgroundTaskState State
-		{
-			get;
-		}
-
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////
 
-		void Terminate();
+		void UpdateProgress(double d);
 
-		void Start(ArgumentList arguments);
+		void UpdateProgress(int current, int max);
 
 	}
 

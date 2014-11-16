@@ -51,7 +51,7 @@ namespace LibHTreeProcessing.src.transformation2.selectors
 		{
 			get {
 				return new string[] {
-					"This operator will select all text chunks and child nodes according to the path specified."
+					"This selector will select all text chunks and child nodes according to the path specified."
 				};
 			}
 		}

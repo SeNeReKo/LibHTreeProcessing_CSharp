@@ -15,6 +15,7 @@ namespace LibHTreeProcessing.src.transformation2.filters
 		////////////////////////////////////////////////////////////////
 
 		public static readonly Type[] ALL_PARSER_COMPONENT_TYPES = new Type[] {
+			typeof(BuildPathFromAttributes_ParserComponent),
 			typeof(FilterAddPrefix_ParserComponent),
 			typeof(FilterByRegex_ParserComponent),
 			typeof(FilterResolveHtmlEntities_ParserComponent),

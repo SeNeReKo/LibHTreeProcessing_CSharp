@@ -25,6 +25,8 @@ namespace LibHTreeProcessing.src.backgroundtasks
 		// Variables
 		////////////////////////////////////////////////////////////////
 
+		private Color backgroundColorProgress = Color.LightSteelBlue;
+		private double progress;
 		private IBackgroundTask task;
 		private bool bTerminating;
 
@@ -79,6 +81,35 @@ namespace LibHTreeProcessing.src.backgroundtasks
 				}
 
 				UpdateComponentStates();
+			}
+		}
+
+		public Color BackgroundColorProgress
+		{
+			get {
+				return backgroundColorProgress;
+			}
+			set {
+				this.backgroundColorProgress = value;
+				Invalidate();
+			}
+		}
+
+		[Browsable(false)]
+		public double Progress
+		{
+			get {
+				return progress;
+			}
+			set {
+				if (progress != value) {
+					progress = value;
+					int n = (int)(progress * 100 + 0.5);
+					if (n < 0) n = 0;
+					if (n > 100) n = 100;
+					lblProgress.Text = n + "%";
+					Invalidate();
+				}
 			}
 		}
 

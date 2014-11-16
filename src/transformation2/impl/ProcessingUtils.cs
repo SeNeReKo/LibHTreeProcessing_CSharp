@@ -88,11 +88,16 @@ namespace LibHTreeProcessing.src.transformation2.impl
 			string data, bool bThrowExceptionIfKeyNotFound, int lineNo)
 		{
 			MatchResultGroup mrg = clipboardExpression.MatchAll(dataCtx.Clipboard);
+
+			Dictionary<string, string> __temp = new Dictionary<string, string>();
+
 			foreach (MatchResult mr in mrg) {
 				HElement mapElement = (HElement)(mr.Path.Top.Element);
 				HAttribute mapK = mapElement.Attributes[keyAttrName];
 				if (mapK == null)
 					throw ScriptException.CreateError_Unknown(lineNo, "Map does not contain attribute \"" + keyAttrName + "\"!");
+
+				__temp.Add(mapK.Value, mapK.Value);
 
 				if (mapK.Value.Equals(data)) {
 					// found!
@@ -121,6 +126,7 @@ namespace LibHTreeProcessing.src.transformation2.impl
 			}
 
 			if (bThrowExceptionIfKeyNotFound) {
+				MatchResultGroup mrg2 = clipboardExpression.MatchAll(dataCtx.Clipboard);
 				throw ScriptException.CreateError_Unknown(lineNo, "Map does not contain key \"" + data + "\"!");
 			} else {
 				return null;

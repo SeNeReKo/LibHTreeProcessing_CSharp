@@ -7,13 +7,8 @@ using System.Text;
 namespace LibHTreeProcessing.src.backgroundtasks
 {
 
-	public interface IBackgroundTask
+	public class Argument
 	{
-
-		event OnBackgroundTaskDelegate OnBackgroundTaskStarted;
-		event OnBackgroundTaskDelegate OnBackgroundTaskCompleted;
-
-		event OnTaskProgressDelegate OnProgress;
 
 		////////////////////////////////////////////////////////////////
 		// Constants
@@ -27,42 +22,45 @@ namespace LibHTreeProcessing.src.backgroundtasks
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
+		public Argument(ArgumentDescription argDescr, string value)
+		{
+			this.ArgumentDescription = argDescr;
+			this.Value = value;
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Properties
 		////////////////////////////////////////////////////////////////
 
-		ArgumentDescription[] ArgumentDescriptions
+		public string ID
 		{
-			get;
+			get {
+				return ArgumentDescription.ID;
+			}
 		}
 
-		StringBuilder Output
+		public string Value
 		{
 			get;
+			private set;
 		}
 
-		Exception Error
+		public ArgumentDescription ArgumentDescription
 		{
 			get;
+			private set;
 		}
 
-		string Name
+		public bool IsValid
 		{
-			get;
-		}
-
-		EnumBackgroundTaskState State
-		{
-			get;
+			get {
+				return ArgumentDescription.IsValid(Value);
+			}
 		}
 
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////
-
-		void Terminate();
-
-		void Start(ArgumentList arguments);
 
 	}
 

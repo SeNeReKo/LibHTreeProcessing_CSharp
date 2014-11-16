@@ -39,9 +39,11 @@ namespace LibHTreeProcessing.src.simplexml
 
 		public class XMLWriteSettings
 		{
+			public bool WriteXmlHeader = true;
 			public EnumXMLPrintStyle PrintStyle = EnumXMLPrintStyle.Pretty;
 			public EnumXMLTextOutputEncoding TextEncoding = EnumXMLTextOutputEncoding.EncodeReservedCharsAsEntities;
 			public EnumXMLTextOutputEncoding AttributeEncoding = EnumXMLTextOutputEncoding.EncodeReservedCharsAsEntities;
+			public CheckOutputTextAsInlineDelegate CheckInlineOverride = null;
 		}
 
 		////////////////////////////////////////////////////////////////
@@ -212,14 +214,14 @@ namespace LibHTreeProcessing.src.simplexml
 			}
 		}
 
-		private static void __AddXmlPretty(XMLWriteSettings xmlWriteSettings, string indent, HElement e, CheckOutputTextAsInlineDelegate checkInline,
+		private static void __AddXmlPretty(XMLWriteSettings xmlWriteSettings, string indent, HElement e,
 			bool bForceInline, TextWriter w)
 		{
 			if (bForceInline) {
 				__WriteXmlOpeningTag(xmlWriteSettings, e, w);
 				foreach (HAbstractElement eChild in e.Children) {
 					if (eChild is HElement) {
-						__AddXmlPretty(xmlWriteSettings, "", (HElement)eChild, null, true, w);
+						__AddXmlPretty(xmlWriteSettings, "", (HElement)eChild, true, w);
 					} else
 					if (eChild is HText) {
 						__AddXmlText(xmlWriteSettings, (HText)eChild, w);
@@ -253,13 +255,23 @@ namespace LibHTreeProcessing.src.simplexml
 					string indent2 = indent + "\t";
 					foreach (HAbstractElement eChild in e.Children) {
 						if (eChild is HElement) {
-							__AddXmlPretty(xmlWriteSettings, indent2, (HElement)eChild,
-								checkInline,
-								(checkInline == null) ? false : checkInline.Invoke((HElement)eChild),
-								w);
+							if (bForceInline) {
+								__AddXmlPretty(xmlWriteSettings, indent2, (HElement)eChild, true, w);
+							} else {
+								bool bForceInlineNew = (xmlWriteSettings.CheckInlineOverride == null) ? false : xmlWriteSettings.CheckInlineOverride((HElement)eChild);
+								if (bForceInlineNew) {
+									w.Write(indent2);
+									__AddXmlPretty(xmlWriteSettings, indent2, (HElement)eChild, bForceInlineNew, w);
+									w.Write(Util.CRLF);
+								} else {
+									__AddXmlPretty(xmlWriteSettings, indent2, (HElement)eChild, false, w);
+								}
+							}
 						} else
 						if (eChild is HText) {
+							w.Write(indent2);
 							__AddXmlText(xmlWriteSettings, (HText)eChild, w);
+							w.Write(Util.CRLF);
 						} else
 							throw new ImplementationErrorException();
 					}
@@ -330,16 +342,16 @@ namespace LibHTreeProcessing.src.simplexml
 
 		////////////////////////////////////////////////////////////////
 
-		public static void WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings, CheckOutputTextAsInlineDelegate checkInline,
-			bool bXmlHeader, TextWriter w)
+		public static void WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings,
+			TextWriter w)
 		{
-			WriteAsXML(root, xmlWriteSettings, checkInline, bXmlHeader, null, null, w);
+			WriteAsXML(root, xmlWriteSettings, null, null, w);
 		}
 
-		public static void WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings, CheckOutputTextAsInlineDelegate checkInline, bool bXmlHeader,
+		public static void WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings,
 			IEnumerable<string> specialElements2, IEnumerable<HElement> specialElements, TextWriter w)
 		{
-			if (bXmlHeader) {
+			if (xmlWriteSettings.WriteXmlHeader) {
 				w.Write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 				if (xmlWriteSettings.PrintStyle != EnumXMLPrintStyle.SingleLine)
 					w.Write(Util.CRLF);
@@ -360,7 +372,15 @@ namespace LibHTreeProcessing.src.simplexml
 			}
 			switch (xmlWriteSettings.PrintStyle) {
 				case EnumXMLPrintStyle.Pretty:
-					__AddXmlPretty(xmlWriteSettings, "", root, checkInline, false, w);
+					if (xmlWriteSettings.CheckInlineOverride != null) {
+						if (xmlWriteSettings.CheckInlineOverride(root)) {
+							__AddXmlPretty(xmlWriteSettings, "", root, true, w);
+						} else {
+							__AddXmlPretty(xmlWriteSettings, "", root, false, w);
+						}
+					} else {
+						__AddXmlPretty(xmlWriteSettings, "", root, false, w);
+					}
 					break;
 				case EnumXMLPrintStyle.Simple:
 					__AddXmlSimple(xmlWriteSettings, root, false, w);
@@ -374,10 +394,10 @@ namespace LibHTreeProcessing.src.simplexml
 			}
 		}
 
-		public static void WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings, CheckOutputTextAsInlineDelegate checkInline, bool bXmlHeader,
+		public static void WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings,
 			string[] specialElements2, HElement[] specialElements, TextWriter w)
 		{
-			if (bXmlHeader) {
+			if (xmlWriteSettings.WriteXmlHeader) {
 				w.Write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 				if (xmlWriteSettings.PrintStyle != EnumXMLPrintStyle.SingleLine)
 					w.Write(Util.CRLF);
@@ -398,7 +418,15 @@ namespace LibHTreeProcessing.src.simplexml
 			}
 			switch (xmlWriteSettings.PrintStyle) {
 				case EnumXMLPrintStyle.Pretty:
-					__AddXmlPretty(xmlWriteSettings, "", root, checkInline, false, w);
+					if (xmlWriteSettings.CheckInlineOverride != null) {
+						if (xmlWriteSettings.CheckInlineOverride(root)) {
+							__AddXmlPretty(xmlWriteSettings, "", root, true, w);
+						} else {
+							__AddXmlPretty(xmlWriteSettings, "", root, false, w);
+						}
+					} else {
+						__AddXmlPretty(xmlWriteSettings, "", root, false, w);
+					}
 					break;
 				case EnumXMLPrintStyle.Simple:
 					__AddXmlSimple(xmlWriteSettings, root, false, w);
@@ -412,29 +440,29 @@ namespace LibHTreeProcessing.src.simplexml
 			}
 		}
 
-		public static string WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings, CheckOutputTextAsInlineDelegate checkInline,
-			bool bXmlHeader, IEnumerable<string> specialElements2, IEnumerable<HElement> specialElements)
+		public static string WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings,
+			IEnumerable<string> specialElements2, IEnumerable<HElement> specialElements)
 		{
 			StringWriter w = new StringWriter();
-			WriteAsXML(root, xmlWriteSettings, checkInline, bXmlHeader, specialElements2, specialElements, w);
+			WriteAsXML(root, xmlWriteSettings, specialElements2, specialElements, w);
 			return w.ToString();
 		}
 
-		public static string WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings, CheckOutputTextAsInlineDelegate checkInline,
-			bool bXmlHeader, string[] specialElements2, params HElement[] specialElements)
+		public static string WriteAsXML(HElement root, XMLWriteSettings xmlWriteSettings,
+			string[] specialElements2, params HElement[] specialElements)
 		{
 			StringWriter w = new StringWriter();
-			WriteAsXML(root, xmlWriteSettings, checkInline, bXmlHeader, specialElements2, specialElements, w);
+			WriteAsXML(root, xmlWriteSettings, specialElements2, specialElements, w);
 			return w.ToString();
 		}
 
 		////////////////////////////////////////////////////////////////
 
-		public static void SaveAsXmlToFile(HElement root, XMLWriteSettings xmlWriteSettings, CheckOutputTextAsInlineDelegate checkInline,
-			bool bXmlHeader, string[] specialElements2, HElement[] specialElements, string filePath)
+		public static void SaveAsXmlToFile(HElement root, XMLWriteSettings xmlWriteSettings,
+			string[] specialElements2, HElement[] specialElements, string filePath)
 		{
 			using (StreamWriter w = new StreamWriter(filePath, false, Encoding.UTF8)) {
-				WriteAsXML(root, xmlWriteSettings, checkInline, bXmlHeader, specialElements2, specialElements, w);
+				WriteAsXML(root, xmlWriteSettings, specialElements2, specialElements, w);
 			}
 		}
 

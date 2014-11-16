@@ -41,8 +41,35 @@ namespace LibHTreeProcessing.src.simplexml
 			foreach (XmlAttribute a in xml.Attributes) {
 				countAttributes++;
 
-				node.Attributes.Add(new HAttribute(a.Name, a.Value));
+				node.Attributes.Add(new HAttribute(a.Name, __EncodeEntities(a.Value)));
 			}
+		}
+
+		private static string __EncodeEntities(string attrValue)
+		{
+			StringBuilder sb = new StringBuilder();
+
+			foreach (char c in attrValue) {
+				switch (c) {
+					case '<':
+						sb.Append("&lt;");
+						break;
+					case '>':
+						sb.Append("&gt;");
+						break;
+					case '&':
+						sb.Append("&amp;");
+						break;
+					case '\"':
+						sb.Append("&quot;");
+						break;
+					default:
+						sb.Append(c);
+						break;
+				}
+			}
+
+			return sb.ToString();
 		}
 
 		private static void __CopyNodes(XmlNodeList nodes, List<HAbstractElement> target, bool bResolveEntities,
@@ -143,12 +170,13 @@ namespace LibHTreeProcessing.src.simplexml
 
 		public static HElement LoadXmlFromFile(string filePath, bool bResolveEntities)
 		{
-			XmlTextReader xmlReader = new XmlTextReader(filePath);
-			xmlReader.EntityHandling = EntityHandling.ExpandCharEntities;
+			using (XmlTextReader xmlReader = new XmlTextReader(filePath)) {
+				xmlReader.EntityHandling = EntityHandling.ExpandCharEntities;
 
-			XmlDocument doc = new XmlDocument();
-			doc.Load(xmlReader);
-			return Convert(doc, bResolveEntities);
+				XmlDocument doc = new XmlDocument();
+				doc.Load(xmlReader);
+				return Convert(doc, bResolveEntities);
+			}
 		}
 
 	}

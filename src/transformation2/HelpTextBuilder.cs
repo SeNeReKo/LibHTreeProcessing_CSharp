@@ -102,7 +102,11 @@ namespace LibHTreeProcessing.src.transformation2
 
 				// ----
 
-				TextSequence extraParagraphs = new TextSequence();
+				TextSequence extraParagraphs = new TextSequence(6);
+				string t = __DataTypesToStr(a.ValidInputDataTypes);
+				if (t != null) extraParagraphs.Paragraphs.Add(new TextParagraph(TEXT_STYLE, "Input data types:    " + t, true));
+				t = __DataTypesToStr(a.OutputDataTypes);
+				if (t != null) extraParagraphs.Paragraphs.Add(new TextParagraph(TEXT_STYLE, "Output data types:    " + t, true));
 				foreach (string s in a.LongHelpText) {
 					extraParagraphs.Paragraphs.Add(new TextParagraph(TEXT_STYLE, s, true));
 				}
@@ -112,6 +116,28 @@ namespace LibHTreeProcessing.src.transformation2
 				TextExpandableSegment exp = new TextExpandableSegment(mainParagraph, extraParagraphs);
 				output.Add(exp);
 			}
+		}
+
+		private static string __DataTypesToStr(EnumDataType[] dataTypes)
+		{
+			if ((dataTypes == null) || (dataTypes.Length == 0)) return null;
+
+			StringBuilder sb = new StringBuilder();
+			foreach (EnumDataType dt in dataTypes) {
+				if (sb.Length > 0) sb.Append(", ");
+				switch (dt) {
+					case EnumDataType.SingleAttribute:
+						sb.Append("attribute");
+						break;
+					case EnumDataType.SingleNode:
+						sb.Append("node");
+						break;
+					case EnumDataType.SingleText:
+						sb.Append("text chunk");
+						break;
+				}
+			}
+			return sb.ToString();
 		}
 
 	}

@@ -30,33 +30,33 @@
 			this.components = new System.ComponentModel.Container();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.simpleTreeVisualizer1 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tabControl2 = new System.Windows.Forms.TabControl();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.lwHelp = new LibLightweightGUI.src.LightweightContainerPanel();
 			this.btnTransform = new System.Windows.Forms.Button();
 			this.lblError = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.simpleTreeVisualizer2 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.simpleTreeVisualizer3 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.miNew = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.edtPath = new System.Windows.Forms.TextBox();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.lwHelp = new LibLightweightGUI.src.LightweightContainerPanel();
-			this.simpleTreeVisualizer1 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
-			this.simpleTreeVisualizer2 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
-			this.simpleTreeVisualizer3 = new LibHTreeProcessing.src.gui.SimpleTreeVisualizer();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
 			this.tabPage4.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
-			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -82,6 +82,17 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Original";
 			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// simpleTreeVisualizer1
+			// 
+			this.simpleTreeVisualizer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.simpleTreeVisualizer1.Location = new System.Drawing.Point(3, 3);
+			this.simpleTreeVisualizer1.Name = "simpleTreeVisualizer1";
+			this.simpleTreeVisualizer1.RootNode = null;
+			this.simpleTreeVisualizer1.Size = new System.Drawing.Size(938, 569);
+			this.simpleTreeVisualizer1.TabIndex = 0;
 			// 
 			// tabPage2
 			// 
@@ -113,7 +124,7 @@
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.panel2);
 			this.splitContainer1.Size = new System.Drawing.Size(924, 520);
-			this.splitContainer1.SplitterDistance = 342;
+			this.splitContainer1.SplitterDistance = 326;
 			this.splitContainer1.SplitterWidth = 20;
 			this.splitContainer1.TabIndex = 4;
 			// 
@@ -123,9 +134,30 @@
 			this.tabControl2.Location = new System.Drawing.Point(0, 0);
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
-			this.tabControl2.Size = new System.Drawing.Size(342, 520);
+			this.tabControl2.Size = new System.Drawing.Size(326, 520);
 			this.tabControl2.TabIndex = 2;
 			this.tabControl2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl2_MouseDown);
+			// 
+			// panel2
+			// 
+			this.panel2.AutoScroll = true;
+			this.panel2.BackColor = System.Drawing.Color.White;
+			this.panel2.Controls.Add(this.lwHelp);
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel2.Location = new System.Drawing.Point(0, 0);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(578, 520);
+			this.panel2.TabIndex = 0;
+			// 
+			// lwHelp
+			// 
+			this.lwHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lwHelp.Location = new System.Drawing.Point(0, 0);
+			this.lwHelp.Name = "lwHelp";
+			this.lwHelp.Size = new System.Drawing.Size(578, 288);
+			this.lwHelp.TabIndex = 0;
+			this.lwHelp.Text = "lightweightContainerPanel1";
 			// 
 			// btnTransform
 			// 
@@ -149,6 +181,7 @@
 			this.lblError.Size = new System.Drawing.Size(41, 13);
 			this.lblError.TabIndex = 1;
 			this.lblError.Text = "label1";
+			this.lblError.Click += new System.EventHandler(this.lblError_Click);
 			// 
 			// tabPage3
 			// 
@@ -161,6 +194,15 @@
 			this.tabPage3.Text = "Transformation Result";
 			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
+			// simpleTreeVisualizer2
+			// 
+			this.simpleTreeVisualizer2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.simpleTreeVisualizer2.Location = new System.Drawing.Point(3, 3);
+			this.simpleTreeVisualizer2.Name = "simpleTreeVisualizer2";
+			this.simpleTreeVisualizer2.RootNode = null;
+			this.simpleTreeVisualizer2.Size = new System.Drawing.Size(938, 569);
+			this.simpleTreeVisualizer2.TabIndex = 0;
+			// 
 			// tabPage4
 			// 
 			this.tabPage4.Controls.Add(this.simpleTreeVisualizer3);
@@ -171,6 +213,15 @@
 			this.tabPage4.TabIndex = 3;
 			this.tabPage4.Text = "Clipboard";
 			this.tabPage4.UseVisualStyleBackColor = true;
+			// 
+			// simpleTreeVisualizer3
+			// 
+			this.simpleTreeVisualizer3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.simpleTreeVisualizer3.Location = new System.Drawing.Point(3, 3);
+			this.simpleTreeVisualizer3.Name = "simpleTreeVisualizer3";
+			this.simpleTreeVisualizer3.RootNode = null;
+			this.simpleTreeVisualizer3.Size = new System.Drawing.Size(938, 569);
+			this.simpleTreeVisualizer3.TabIndex = 1;
 			// 
 			// contextMenuStrip1
 			// 
@@ -207,56 +258,6 @@
 			this.edtPath.Size = new System.Drawing.Size(939, 13);
 			this.edtPath.TabIndex = 0;
 			// 
-			// panel2
-			// 
-			this.panel2.AutoScroll = true;
-			this.panel2.BackColor = System.Drawing.Color.White;
-			this.panel2.Controls.Add(this.lwHelp);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(0, 0);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(562, 520);
-			this.panel2.TabIndex = 0;
-			// 
-			// lwHelp
-			// 
-			this.lwHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lwHelp.Location = new System.Drawing.Point(0, 0);
-			this.lwHelp.Name = "lwHelp";
-			this.lwHelp.Size = new System.Drawing.Size(562, 288);
-			this.lwHelp.TabIndex = 0;
-			this.lwHelp.Text = "lightweightContainerPanel1";
-			// 
-			// simpleTreeVisualizer1
-			// 
-			this.simpleTreeVisualizer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleTreeVisualizer1.Location = new System.Drawing.Point(3, 3);
-			this.simpleTreeVisualizer1.Name = "simpleTreeVisualizer1";
-			this.simpleTreeVisualizer1.RootNode = null;
-			this.simpleTreeVisualizer1.Size = new System.Drawing.Size(938, 569);
-			this.simpleTreeVisualizer1.TabIndex = 0;
-			// 
-			// simpleTreeVisualizer2
-			// 
-			this.simpleTreeVisualizer2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.simpleTreeVisualizer2.Location = new System.Drawing.Point(3, 3);
-			this.simpleTreeVisualizer2.Name = "simpleTreeVisualizer2";
-			this.simpleTreeVisualizer2.RootNode = null;
-			this.simpleTreeVisualizer2.Size = new System.Drawing.Size(938, 569);
-			this.simpleTreeVisualizer2.TabIndex = 0;
-			// 
-			// simpleTreeVisualizer3
-			// 
-			this.simpleTreeVisualizer3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.simpleTreeVisualizer3.Location = new System.Drawing.Point(3, 3);
-			this.simpleTreeVisualizer3.Name = "simpleTreeVisualizer3";
-			this.simpleTreeVisualizer3.RootNode = null;
-			this.simpleTreeVisualizer3.Size = new System.Drawing.Size(938, 569);
-			this.simpleTreeVisualizer3.TabIndex = 1;
-			// 
 			// TransformHierarchicalDocumentForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,12 +274,12 @@
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
+			this.panel2.ResumeLayout(false);
 			this.tabPage3.ResumeLayout(false);
 			this.tabPage4.ResumeLayout(false);
 			this.contextMenuStrip1.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
-			this.panel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

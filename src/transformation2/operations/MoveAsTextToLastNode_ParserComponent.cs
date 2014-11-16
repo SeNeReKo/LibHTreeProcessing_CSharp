@@ -15,7 +15,7 @@ using LibHTreeProcessing.src.transformation2.impl;
 namespace LibHTreeProcessing.src.transformation2.operations
 {
 
-	public class SetAsTextAtNode_ParserComponent : AbstractOperationParserComponent
+	public class MoveAsTextToLastNode_ParserComponent : AbstractOperationParserComponent
 	{
 
 		////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
-		public SetAsTextAtNode_ParserComponent()
+		public MoveAsTextToLastNode_ParserComponent()
 			: base(EnumDataType.SingleText, EnumDataType.SingleAttribute)
 		{
 		}
@@ -43,7 +43,8 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		{
 			get {
 				return new string[] {
-					"set as text at node \"/some/path\""
+					"move as text to last node",
+					"move as text to last node \"nodeName\""
 				};
 			}
 		}
@@ -52,8 +53,8 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		{
 			get {
 				return new string[] {
-					"This operator will receive either text chunks or attributes. It will use that data as a value: It will select the node as specified,"
-					+ " clear all text from it and then add a new text chunk containing that value."
+					"This operator will receive either text chunks or attributes. It will use that data as a value: It will select the last node as specified,"
+					+ " clear all text from it and then move the text value as a new text chunk to that node."
 				};
 			}
 		}
@@ -69,21 +70,22 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			Token[] tokensMatched;
 
 			if ((tokensMatched = tokens.TryEatSequence(
-				TokenPattern.MatchWord("set"),
+				TokenPattern.MatchWord("move"),
 				TokenPattern.MatchWord("as"),
 				TokenPattern.MatchWord("text"),
-				TokenPattern.MatchWord("at"),
-				TokenPattern.MatchWord("node"),
-				TokenPattern.MatchAnyStringDQ()
+				TokenPattern.MatchWord("to"),
+				TokenPattern.MatchWord("last"),
+				TokenPattern.MatchWord("node")
 				)) == null)
 				return null;
 
-			HExpression he = ParsingUtils.ParseExpression(tokensMatched[5].Text, tokensMatched[5].LineNumber, false);
-			if (he.DetermineSelectedElementType() != EnumElementType.Node) {
-				throw ScriptException.CreateError_InvalidNodePathSpecified(tokensMatched[5].LineNumber, tokensMatched[5].Text);
+			Token tokenNodeName = tokens.TryEat(TokenPattern.MatchAnyStringDQ());
+			if (tokenNodeName == null) {
+				return new MoveAsTextToLastNode_Operation(lineNo, null);
+			} else {
+				ParsingUtils.VerifyString(tokenNodeName.Text, tokenNodeName.LineNumber);
+				return new MoveAsTextToLastNode_Operation(lineNo, tokenNodeName.Text);
 			}
-
-			return new SetAsTextAtNode_Operation(lineNo, he);
 		}
 
 	}

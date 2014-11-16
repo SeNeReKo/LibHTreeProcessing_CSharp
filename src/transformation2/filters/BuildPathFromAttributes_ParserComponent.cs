@@ -15,7 +15,7 @@ using LibHTreeProcessing.src.transformation2.impl;
 namespace LibHTreeProcessing.src.transformation2.filters
 {
 
-	public class TransformEntitiesByClipboardMap_ParserComponent : AbstractFilterParserComponent
+	public class BuildPathFromAttributes_ParserComponent : AbstractFilterParserComponent
 	{
 
 		////////////////////////////////////////////////////////////////
@@ -30,8 +30,8 @@ namespace LibHTreeProcessing.src.transformation2.filters
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
-		public TransformEntitiesByClipboardMap_ParserComponent()
-			: base(EnumDataType.SingleText, EnumDataType.SingleAttribute)
+		public BuildPathFromAttributes_ParserComponent()
+			: base(EnumDataType.SingleNode, EnumDataType.SingleAttribute)
 		{
 		}
 
@@ -43,7 +43,7 @@ namespace LibHTreeProcessing.src.transformation2.filters
 		{
 			get {
 				return new string[] {
-					"transform entities by clipboard map \"somepath\""
+					"build path based on attribute \"sometext\" with delimiter \"delim\""
 				};
 			}
 		}
@@ -52,8 +52,8 @@ namespace LibHTreeProcessing.src.transformation2.filters
 		{
 			get {
 				return new string[] {
-					"This filter splits the text from an text or attribute recieved at entity definitions and replaces these character sequences with"
-					+ " data provided by a clipboard map."
+					"This filter takes a node, determines all ancestors, and builds a path based on the specified attribute."
+					+ " A text chunk is then created and returned."
 				};
 			}
 		}
@@ -64,43 +64,26 @@ namespace LibHTreeProcessing.src.transformation2.filters
 
 		public override AbstractFilter TryParse(IParsingContext ctx, TokenStream tokens)
 		{
+			int lineNo = tokens.LineNumber;
+
 			Token[] tokensMatched;
 
 			if ((tokensMatched = tokens.TryEatSequence(
-				TokenPattern.MatchWord("transform"),
-				TokenPattern.MatchWord("entities"),
-				TokenPattern.MatchWord("by"),
-				TokenPattern.MatchWord("clipboard"),
-				TokenPattern.MatchWord("map"),
+				TokenPattern.MatchWord("build"),
+				TokenPattern.MatchWord("path"),
+				TokenPattern.MatchWord("based"),
+				TokenPattern.MatchWord("on"),
+				TokenPattern.MatchWord("attribute"),
+				TokenPattern.MatchAnyStringDQ(),
+				TokenPattern.MatchWord("with"),
+				TokenPattern.MatchWord("delimiter"),
 				TokenPattern.MatchAnyStringDQ()
 				)) == null)
 				return null;
 
-			// ----
+			ParsingUtils.VerifyString(tokensMatched[5].Text, tokensMatched[5].LineNumber);
 
-			HExpression expression = ParsingUtils.ParseExpression(tokensMatched[5].Text, tokens.LineNumber, false);
-
-			Dictionary<string, EnumElementType> emitIDs;
-			EnumElementType lastElementType;
-			expression.CollectEmitIDs(out emitIDs, out lastElementType);
-			if (emitIDs.Count > 0) {
-				ScriptException.CreateError_Unknown(tokensMatched[5].LineNumber,
-					"Expression has emit IDs!");
-			}
-			if (lastElementType != EnumElementType.Node) {
-				ScriptException.CreateError_Unknown(tokensMatched[5].LineNumber,
-					"Last match in expression does not specify matching an element!");
-			}
-
-			expression = ParsingUtils.ParseExpression("/clipboard" + tokensMatched[5].Text, tokens.LineNumber, false);
-
-			// ----
-
-			// ParsingUtils.VerifyString(tokensMatched[7].Text, tokens.LineNumber);
-
-			// ----
-
-			return new TransformEntitiesByClipboardMap_Operation(tokensMatched[0].LineNumber, expression);
+			return new BuildPathFromAttributes_Operation(lineNo, tokensMatched[5].Text, tokensMatched[8].Text);
 		}
 
 	}

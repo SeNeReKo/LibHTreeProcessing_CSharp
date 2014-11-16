@@ -15,7 +15,7 @@ using LibHTreeProcessing.src.transformation2.impl;
 namespace LibHTreeProcessing.src.transformation2.operations
 {
 
-	public class SetAsTextAtNode_ParserComponent : AbstractOperationParserComponent
+	public class MoveToChildNode_ParserComponent : AbstractOperationParserComponent
 	{
 
 		////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
-		public SetAsTextAtNode_ParserComponent()
+		public MoveToChildNode_ParserComponent()
 			: base(EnumDataType.SingleText, EnumDataType.SingleAttribute)
 		{
 		}
@@ -43,7 +43,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		{
 			get {
 				return new string[] {
-					"set as text at node \"/some/path\""
+					"move to child node \"/some/path\""
 				};
 			}
 		}
@@ -52,8 +52,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		{
 			get {
 				return new string[] {
-					"This operator will receive either text chunks or attributes. It will use that data as a value: It will select the node as specified,"
-					+ " clear all text from it and then add a new text chunk containing that value."
+					"This operator moves the element received to the node specified. The elements moved can be attributes or a text chunks."
 				};
 			}
 		}
@@ -69,21 +68,32 @@ namespace LibHTreeProcessing.src.transformation2.operations
 			Token[] tokensMatched;
 
 			if ((tokensMatched = tokens.TryEatSequence(
-				TokenPattern.MatchWord("set"),
-				TokenPattern.MatchWord("as"),
-				TokenPattern.MatchWord("text"),
-				TokenPattern.MatchWord("at"),
+				TokenPattern.MatchWord("move"),
+				TokenPattern.MatchWord("to"),
+				TokenPattern.MatchWord("child"),
 				TokenPattern.MatchWord("node"),
 				TokenPattern.MatchAnyStringDQ()
 				)) == null)
 				return null;
 
-			HExpression he = ParsingUtils.ParseExpression(tokensMatched[5].Text, tokensMatched[5].LineNumber, false);
-			if (he.DetermineSelectedElementType() != EnumElementType.Node) {
-				throw ScriptException.CreateError_InvalidNodePathSpecified(tokensMatched[5].LineNumber, tokensMatched[5].Text);
+			ParsingUtils.VerifyString(tokensMatched[4].Text, tokensMatched[4].LineNumber);
+			HExpression expression = ParsingUtils.ParseExpression(tokensMatched[4].Text, tokensMatched[4].LineNumber, false);
+
+			Dictionary<string, EnumElementType> emitIDCollection;
+			EnumElementType lastElement;
+			expression.CollectEmitIDs(out emitIDCollection, out lastElement);
+
+			if (emitIDCollection.Count > 1) {
+				ScriptException.CreateError_MoreThanOneEmitIDsSpecified(lineNo);
+			} else
+			if (emitIDCollection.Count == 1) {
+				lastElement = emitIDCollection.First().Value;
+			}
+			if (lastElement != EnumElementType.Node) {
+				throw ScriptException.CreateError_NodeExpressionRequired(lineNo, tokensMatched[2].Text);
 			}
 
-			return new SetAsTextAtNode_Operation(lineNo, he);
+			return new MoveToChildNode_Operation(lineNo, expression);
 		}
 
 	}

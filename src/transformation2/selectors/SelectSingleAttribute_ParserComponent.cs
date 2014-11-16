@@ -51,7 +51,7 @@ namespace LibHTreeProcessing.src.transformation2.selectors
 		{
 			get {
 				return new string[] {
-					"This operator will select a single attribute according to the path specified. Please have in mind that path expressions"
+					"This selector will select a single attribute according to the path specified. Please have in mind that path expressions"
 					+ " will result in node or text chunks by default. Use naming to select an attribute."
 				};
 			}

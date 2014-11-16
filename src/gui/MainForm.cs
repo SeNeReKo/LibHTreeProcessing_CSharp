@@ -57,6 +57,7 @@ namespace LibHTreeProcessing.src.gui
 		private ScriptManager scriptManager;
 		private ScriptCompiler parser;
 		private IParsingContext parsingContext;
+		private PersistentProperties pp;
 
 		private List<ToolStripItem> extraContextMenuItems;
 
@@ -64,8 +65,9 @@ namespace LibHTreeProcessing.src.gui
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
-		public MainForm(ScriptManager scriptManager, int maxExpandedNodes)
+		public MainForm(PersistentProperties pp, ScriptManager scriptManager, int maxExpandedNodes)
 		{
+			this.pp = pp;
 			this.scriptManager = scriptManager;
 			this.extraContextMenuItems = new List<ToolStripItem>();
 
@@ -289,10 +291,30 @@ namespace LibHTreeProcessing.src.gui
 			return mi;
 		}
 
-		public void StartTask(IBackgroundTask task)
+		public IBackgroundTask StartTask(IBackgroundTask task, string ppID, string argDisplayText)
+		{
+			Argument[] arguments;
+			if (task.ArgumentDescriptions.Length > 0) {
+				ArgumentEditorForm form = new ArgumentEditorForm(pp, ppID, argDisplayText, task.ArgumentDescriptions);
+				if (form.ShowDialog() != System.Windows.Forms.DialogResult.OK) {
+					return null;
+				} else {
+					arguments = form.Arguments;
+				}
+			} else {
+				arguments = new Argument[0];
+			}
+
+			StartTask(task, new ArgumentList(arguments));
+
+			return task;
+		}
+
+		public IBackgroundTask StartTask(IBackgroundTask task, ArgumentList arguments)
 		{
 			backgroundTaskList1.Tasks.Add(task);
-			task.Start();
+			task.Start(arguments);
+			return task;
 		}
 
 	}

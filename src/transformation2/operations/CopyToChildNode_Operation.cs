@@ -15,7 +15,7 @@ using LibHTreeProcessing.src.transformation2.impl;
 namespace LibHTreeProcessing.src.transformation2.operations
 {
 
-	public class MoveTo_Operation : AbstractOperation
+	public class CopyToChildNode_Operation : AbstractOperation
 	{
 
 		////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 		/// Constructor.
 		/// </summary>
 		/// <param name="lineNo">Line number of first token from parsing this selector.</param>
-		public MoveTo_Operation(int lineNo, HExpression expression)
+		public CopyToChildNode_Operation(int lineNo, HExpression expression)
 			: base(lineNo)
 		{
 			this.expression = expression;
@@ -61,19 +61,8 @@ namespace LibHTreeProcessing.src.transformation2.operations
 
 			// select node where the element should be inserted
 
-			MatchResult mr = expression.MatchOne(dataCtx.Document);
-			if (mr == null)
-				throw ScriptException.CreateError_SelectorDidNotReturnAnyData(LineNumber);
-
-			// remove element from parent
-
-			if (currentElement is HAttribute) {
-				parent.Attributes.Remove((HAttribute)currentElement);
-			} else {
-				int n = parent.Children.IndexOf(currentElement);
-				if (n < 0) throw ScriptException.CreateError_Unknown(LineNumber, "Element not found in child list of parent!");
-				parent.Children.RemoveAt(n);
-			}
+			MatchResult mr = expression.MatchOne(parent);
+			if (mr == null) throw ScriptException.CreateError_SelectorDidNotReturnAnyData(LineNumber);
 
 			// prepare insert
 
@@ -83,11 +72,7 @@ namespace LibHTreeProcessing.src.transformation2.operations
 
 			// insert into tree
 
-			if (currentElement is HAttribute) {
-				selectedNode.Attributes.Add((HAttribute)currentElement);
-			} else {
-				selectedNode.Children.Add(currentElement);
-			}
+			selectedNode.Children.Add(currentElement);
 		}
 		
 	}

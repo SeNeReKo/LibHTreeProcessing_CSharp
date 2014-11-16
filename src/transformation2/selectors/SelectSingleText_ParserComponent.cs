@@ -51,7 +51,7 @@ namespace LibHTreeProcessing.src.transformation2.selectors
 		{
 			get {
 				return new string[] {
-					"This operator will select a single text chunk according to the path specified."
+					"This selector will select a single text chunk according to the path specified."
 				};
 			}
 		}

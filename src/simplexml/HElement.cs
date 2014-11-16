@@ -107,10 +107,20 @@ namespace LibHTreeProcessing.src.simplexml
 		{
 			HAttribute a = Attributes[name];
 			if (a == null) return false;
+
+			if (possibleValues.Length == 0) return true;
+
 			foreach (string s in possibleValues) {
 				if (s.Equals(a.Value)) return true;
 			}
 			return false;
+		}
+
+		public string GetAttributeValue(string name)
+		{
+			HAttribute a = Attributes[name];
+			if (a == null) return null;
+			return a.Value;
 		}
 
 		public override bool ToPlainText(TextWriter tw)
@@ -195,6 +205,17 @@ namespace LibHTreeProcessing.src.simplexml
 			HText t = new HText(text);
 			Children.Add(t);
 			return t;
+		}
+
+		public string GetAllText()
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (HAbstractElement he in Children) {
+				if (he is HText) {
+					sb.Append(((HText)he).Text);
+				}
+			}
+			return sb.ToString();
 		}
 
 		public HElement RemoveChildElement(string name)

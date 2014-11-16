@@ -118,8 +118,36 @@ namespace LibHTreeProcessing.src.treesearch
 			return attr;
 		}
 
+		public HAttribute GetSingleElementSelected(out HAttribute attr)
+		{
+			HPathWithIndices path;
+			HAbstractElement he;
+			GetSingleElementSelected(out path, out he);
+
+			if (!(he is HAttribute))
+				throw new Exception("Can't process: Last element of path is not of type \"attribute\"! Path: " + path.ToString());
+
+			attr = (HAttribute)he;
+
+			return attr;
+		}
+
 		public HElement GetSingleElementSelected(out HPathWithIndices path, out HElement element)
 		{
+			HAbstractElement he;
+			GetSingleElementSelected(out path, out he);
+
+			if (!(he is HElement))
+				throw new Exception("Can't process: Last element of path is not of type \"node\"! Path: " + path.ToString());
+
+			element = (HElement)he;
+
+			return element;
+		}
+
+		public HElement GetSingleElementSelected(out HElement element)
+		{
+			HPathWithIndices path;
 			HAbstractElement he;
 			GetSingleElementSelected(out path, out he);
 
@@ -144,17 +172,44 @@ namespace LibHTreeProcessing.src.treesearch
 			return element;
 		}
 
+		public HText GetSingleElementSelected(out HText element)
+		{
+			HPathWithIndices path;
+			HAbstractElement he;
+			GetSingleElementSelected(out path, out he);
+
+			if (!(he is HText))
+				throw new Exception("Can't process: Last element of path is not of type \"text\"! Path: " + path.ToString());
+
+			element = (HText)he;
+
+			return element;
+		}
+
 		public HAbstractElement GetSingleElementSelected(out HPathWithIndices path, out HAbstractElement he)
 		{
 			if (Count == 0) {
 				path = Path;
 				he = Path[Path.Count - 1].Element;
 			} else
-			if (Count == 1) {
-				path = Path;
-				he = this[0].Element;
+				if (Count == 1) {
+					path = Path;
+					he = this[0].Element;
+				} else
+					throw new Exception("More than one items emitted!");
+
+			return he;
+		}
+
+		public HAbstractElement GetSingleElementSelected(out HAbstractElement he)
+		{
+			if (Count == 0) {
+				he = Path[Path.Count - 1].Element;
 			} else
-				throw new Exception("More than one items emitted!");
+				if (Count == 1) {
+					he = this[0].Element;
+				} else
+					throw new Exception("More than one items emitted!");
 
 			return he;
 		}

@@ -117,6 +117,16 @@ namespace LibHTreeProcessing.src.gui
 			}
 		}
 
+		private SourceCodeTextControl SelectedScriptControl
+		{
+			get {
+				int n = tabControl2.SelectedIndex;
+				if (n < 0) return null;
+				TabPage tabPage = tabControl2.TabPages[n];
+				return (SourceCodeTextControl)(tabPage.Controls[0]);
+			}
+		}
+
 		////////////////////////////////////////////////////////////////
 		// Methods
 		////////////////////////////////////////////////////////////////
@@ -245,15 +255,26 @@ namespace LibHTreeProcessing.src.gui
 			try {
 				IScript script = parser.Compile(parsingContext, content);
 				lblError.Visible = false;
+			} catch (ScriptException se) {
+				lblError.Text = se.Message;
+				lblError.Visible = true;
+				if (se.LineNumber < 0) {
+					source.HighlightedLine = source.CountLines - 1;
+				} else {
+					source.HighlightedLine = se.LineNumber - 1;
+				}
 			} catch (Exception ee) {
 				lblError.Text = ee.Message;
 				lblError.Visible = true;
+				source.HighlightedLine = -1;
 			}
 		}
 
 		private void tabControl2_MouseDown(object sender, MouseEventArgs e)
 		{
-			contextMenuStrip1.Show((Control)sender, e.Location);
+			if ((int)(e.Button & System.Windows.Forms.MouseButtons.Right) != 0) {
+				contextMenuStrip1.Show((Control)sender, e.Location);
+			}
 		}
 
 		private void btn_SaveAsXML_Click(object sender, EventArgs e)
@@ -269,11 +290,29 @@ namespace LibHTreeProcessing.src.gui
 			try {
 				HToolkit.XMLWriteSettings settings = new HToolkit.XMLWriteSettings();
 				settings.PrintStyle = HToolkit.EnumXMLPrintStyle.Pretty;
-				HToolkit.SaveAsXmlToFile(simpleTreeVisualizer2.RootNode, settings, null, true, null, null, sfd.FileName);
+				settings.CheckInlineOverride = new HToolkit.CheckOutputTextAsInlineDelegate(__CheckOutputAsInline);
+				HToolkit.SaveAsXmlToFile(simpleTreeVisualizer2.RootNode, settings, null, null, sfd.FileName);
 			} catch (Exception ee) {
 				ErrorForm f = new ErrorForm("Failed to save file: " + sfd.FileName, ee);
 				f.ShowDialog();
 			}
+		}
+
+		private bool __CheckOutputAsInline(HElement he)
+		{
+			if (he.Name.Equals("w")) return true;
+			if (he.Name.Equals("g")) return true;
+			if (he.Name.Equals("head")) return true;
+			return false;
+		}
+
+		private void lblError_Click(object sender, EventArgs e)
+		{
+			SourceCodeTextControl scriptControl = SelectedScriptControl;
+			if (scriptControl == null) return;
+			int n = scriptControl.HighlightedLine;
+			if (n < 0) return;
+			scriptControl.GoToLine(n);
 		}
 
 	}

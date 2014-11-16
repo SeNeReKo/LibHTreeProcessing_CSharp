@@ -66,6 +66,21 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\backgroundtasks\AbstractBackgroundTask.cs" />
+    <Compile Include="src\backgroundtasks\Argument.cs" />
+    <Compile Include="src\backgroundtasks\ArgumentDescription.cs" />
+    <Compile Include="src\backgroundtasks\ArgumentEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\backgroundtasks\ArgumentEditorControl.Designer.cs">
+      <DependentUpon>ArgumentEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\backgroundtasks\ArgumentEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\backgroundtasks\ArgumentEditorForm.Designer.cs">
+      <DependentUpon>ArgumentEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\backgroundtasks\ArgumentList.cs" />
     <Compile Include="src\backgroundtasks\BackgroundTaskLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -81,6 +96,8 @@
     <Compile Include="src\backgroundtasks\EnumBackgroundTaskState.cs" />
     <Compile Include="src\backgroundtasks\IBackgroundTask.cs" />
     <Compile Include="src\backgroundtasks\OnBackgroundTaskDelegate.cs" />
+    <Compile Include="src\backgroundtasks\OnTaskProgressDelegate.cs" />
+    <Compile Include="src\backgroundtasks\ProgressIndicator.cs" />
     <Compile Include="src\gui\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +159,8 @@
     <Compile Include="src\stringmatching\StringMatcherEquals.cs" />
     <Compile Include="src\stringmatching\StringMatcherStartsWith.cs" />
     <Compile Include="src\transformation2\cmds\AbstractScriptCommandParserComponent.cs" />
+    <Compile Include="src\transformation2\filters\BuildPathFromAttributes_Operation.cs" />
+    <Compile Include="src\transformation2\filters\BuildPathFromAttributes_ParserComponent.cs" />
     <Compile Include="src\transformation2\filters\FilterConvertToLowerCase_Operation.cs" />
     <Compile Include="src\transformation2\filters\FilterConvertToLowerCase_ParserComponent.cs" />
     <Compile Include="src\transformation2\filters\FilterConvertToUpperCase_Operation.cs" />
@@ -150,6 +169,12 @@
     <Compile Include="src\transformation2\impl\TransformationRuleParserComponentSorter.cs" />
     <Compile Include="src\transformation2\operations\CloneNode_ParserComponent.cs" />
     <Compile Include="src\transformation2\operations\CloneNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\CopyToChildNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\CopyToChildNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\MoveToChildNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\MoveToChildNode_ParserComponent.cs" />
+    <Compile Include="src\transformation2\operations\MoveAsTextToLastNode_Operation.cs" />
+    <Compile Include="src\transformation2\operations\MoveAsTextToLastNode_ParserComponent.cs" />
     <Compile Include="src\transformation2\operations\SetAsTextAtNode_Operation.cs" />
     <Compile Include="src\transformation2\operations\SetAsTextAtNode_ParserComponent.cs" />
     <Compile Include="src\transformation2\operations\SetAsAttributeAtNode_Operation.cs" />
@@ -337,6 +362,12 @@
     <Compile Include="src\TagObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="src\backgroundtasks\ArgumentEditorControl.resx">
+      <DependentUpon>ArgumentEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\backgroundtasks\ArgumentEditorForm.resx">
+      <DependentUpon>ArgumentEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\backgroundtasks\BackgroundTaskLabel.resx">
       <DependentUpon>BackgroundTaskLabel.cs</DependentUpon>
     </EmbeddedResource>

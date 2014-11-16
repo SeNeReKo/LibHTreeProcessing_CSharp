@@ -26,7 +26,12 @@ namespace LibHTreeProcessing.src
 		// Constructors
 		////////////////////////////////////////////////////////////////
 
-		public HierarchyPath(string[] documentHierarchyPath)
+		public HierarchyPath(IEnumerable<string> documentHierarchyPath)
+		{
+			this.documentHierarchyPath = (new List<string>(documentHierarchyPath)).ToArray();
+		}
+
+		public HierarchyPath(params string[] documentHierarchyPath)
 		{
 			this.documentHierarchyPath = documentHierarchyPath;
 		}
