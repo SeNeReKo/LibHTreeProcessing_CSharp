@@ -16,27 +16,6 @@ namespace LibHTreeProcessing.src.simplexml
 	public partial class HToolkit
 	{
 
-		[Flags]
-		public enum EnumXMLFlags : int
-		{
-			None = 0,
-			ConserveInlineEntities = 1,
-		}
-
-		public enum EnumXMLTextOutputEncoding
-		{
-			AlwaysAsIs,
-			OnReservedCharsOutputTextAsCData,
-			EncodeReservedCharsAsEntities
-		}
-
-		public enum EnumXMLPrintStyle
-		{
-			SingleLine,
-			Simple,
-			Pretty
-		}
-
 		public class XMLWriteSettings
 		{
 			public bool WriteXmlHeader = true;
@@ -158,7 +137,7 @@ namespace LibHTreeProcessing.src.simplexml
 					}
 					break;
 				case EnumXMLTextOutputEncoding.OnReservedCharsOutputTextAsCData: {
-						if ((text.IndexOf('&') >= 0) || (text.IndexOf('>') >= 0) || (text.IndexOf('<') >= 0)) {
+						if ((text.IndexOf('&') >= 0) || (text.IndexOf('\"') >= 0) || (text.IndexOf('>') >= 0) || (text.IndexOf('<') >= 0)) {
 							w.Write("<![CDATA[");
 							if (text.Contains("<![CDATA["))
 								throw new Exception("Text may not contain \"<![CDATA[\"! Recursive CDATA-definitions are not allowed!");

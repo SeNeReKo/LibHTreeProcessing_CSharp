@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 
 
+using LibSimpleScriptEditor.src;
+
+
 namespace LibHTreeProcessing.src.transformation2
 {
 
-	public class ScriptException : Exception
+	public class ScriptException : Exception, ICompilationError
 	{
 
 		////////////////////////////////////////////////////////////////

@@ -34,8 +34,6 @@
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tabControl2 = new System.Windows.Forms.TabControl();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.lwHelp = new LibLightweightGUI.src.LightweightContainerPanel();
 			this.btnTransform = new System.Windows.Forms.Button();
 			this.lblError = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -46,13 +44,13 @@
 			this.miNew = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.edtPath = new System.Windows.Forms.TextBox();
+			this.helpPanel1 = new LibSimpleScriptEditor.src.HelpPanel();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			this.panel2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
 			this.tabPage4.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
@@ -122,9 +120,9 @@
 			// 
 			// splitContainer1.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.panel2);
+			this.splitContainer1.Panel2.Controls.Add(this.helpPanel1);
 			this.splitContainer1.Size = new System.Drawing.Size(924, 520);
-			this.splitContainer1.SplitterDistance = 326;
+			this.splitContainer1.SplitterDistance = 310;
 			this.splitContainer1.SplitterWidth = 20;
 			this.splitContainer1.TabIndex = 4;
 			// 
@@ -134,30 +132,9 @@
 			this.tabControl2.Location = new System.Drawing.Point(0, 0);
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
-			this.tabControl2.Size = new System.Drawing.Size(326, 520);
+			this.tabControl2.Size = new System.Drawing.Size(310, 520);
 			this.tabControl2.TabIndex = 2;
 			this.tabControl2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl2_MouseDown);
-			// 
-			// panel2
-			// 
-			this.panel2.AutoScroll = true;
-			this.panel2.BackColor = System.Drawing.Color.White;
-			this.panel2.Controls.Add(this.lwHelp);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(0, 0);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(578, 520);
-			this.panel2.TabIndex = 0;
-			// 
-			// lwHelp
-			// 
-			this.lwHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lwHelp.Location = new System.Drawing.Point(0, 0);
-			this.lwHelp.Name = "lwHelp";
-			this.lwHelp.Size = new System.Drawing.Size(578, 288);
-			this.lwHelp.TabIndex = 0;
-			this.lwHelp.Text = "lightweightContainerPanel1";
 			// 
 			// btnTransform
 			// 
@@ -258,6 +235,17 @@
 			this.edtPath.Size = new System.Drawing.Size(939, 13);
 			this.edtPath.TabIndex = 0;
 			// 
+			// helpPanel1
+			// 
+			this.helpPanel1.AutoScroll = true;
+			this.helpPanel1.BackColor = System.Drawing.Color.White;
+			this.helpPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.helpPanel1.HelpText = null;
+			this.helpPanel1.Location = new System.Drawing.Point(0, 0);
+			this.helpPanel1.Name = "helpPanel1";
+			this.helpPanel1.Size = new System.Drawing.Size(594, 520);
+			this.helpPanel1.TabIndex = 0;
+			// 
 			// TransformHierarchicalDocumentForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,7 +262,6 @@
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
-			this.panel2.ResumeLayout(false);
 			this.tabPage3.ResumeLayout(false);
 			this.tabPage4.ResumeLayout(false);
 			this.contextMenuStrip1.ResumeLayout(false);
@@ -302,7 +289,6 @@
 		private System.Windows.Forms.TextBox edtPath;
 		private System.Windows.Forms.TabPage tabPage4;
 		private SimpleTreeVisualizer simpleTreeVisualizer3;
-		private System.Windows.Forms.Panel panel2;
-		private LibLightweightGUI.src.LightweightContainerPanel lwHelp;
+		private LibSimpleScriptEditor.src.HelpPanel helpPanel1;
 	}
 }

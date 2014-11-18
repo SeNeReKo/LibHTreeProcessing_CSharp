@@ -12,12 +12,12 @@ using System.Xml;
 
 using LibNLPCSharp.util;
 using LibNLPCSharp.gui;
+using LibNLPCSharp.bgtask;
 
 using LibHTreeProcessing.src;
 using LibHTreeProcessing.src.simplexml;
 using LibHTreeProcessing.src.transformation2;
 using LibHTreeProcessing.src.transformation2.impl;
-using LibHTreeProcessing.src.backgroundtasks;
 
 
 namespace LibHTreeProcessing.src.gui
@@ -289,6 +289,11 @@ namespace LibHTreeProcessing.src.gui
 			contextMenuStrip1.Items.Add(mi);
 
 			return mi;
+		}
+
+		public IBackgroundTask StartTask(IBackgroundTask task, string argDisplayText)
+		{
+			return StartTask(task, task.GetType().Name, argDisplayText);
 		}
 
 		public IBackgroundTask StartTask(IBackgroundTask task, string ppID, string argDisplayText)

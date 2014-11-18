@@ -16,6 +16,8 @@ using LibNLPCSharp.gui;
 
 using LibLightweightGUI.src.textmodel;
 
+using LibSimpleScriptEditor.src;
+
 using LibHTreeProcessing.src.simplexml;
 using LibHTreeProcessing.src;
 using LibHTreeProcessing.src.transformation2;
@@ -43,6 +45,7 @@ namespace LibHTreeProcessing.src.gui
 		ScriptManager scriptManager;
 		HElement docRoot;
 		HierarchyPath hierarchyPath;
+		ICompilationError compilationError;
 
 		////////////////////////////////////////////////////////////////
 		// Constructors
@@ -71,12 +74,7 @@ namespace LibHTreeProcessing.src.gui
 			edtPath.Text = hierarchyPath;
 
 			TextModel helpDoc = HelpTextBuilder.CreateHelpText(parser);
-			ModelToLightweightControlConverter.Convert(
-				helpDoc,
-				lwHelp.CreateLayer()
-				);
-			lwHelp[0].DoLayout();
-			string dump = lwHelp.Dump();
+			helpPanel1.HelpText = helpDoc;
 
 			foreach (string fileNameWithoutExt in scriptManager.ScriptFileNames) {
 				TabPage tabPage = new TabPage(fileNameWithoutExt);
@@ -86,7 +84,7 @@ namespace LibHTreeProcessing.src.gui
 				tb.Dock = DockStyle.Fill;
 				tb.Tag = fileNameWithoutExt;
 				tb.Text = scriptManager.Load(fileNameWithoutExt);
-				tb.OnTextChangedDelayed += new SourceCodeTextControl.TextEventDelegate(tb_OnTextChangedDelayed);
+				tb.OnTextChangedDelayed += new OnTextEventDelegate(tb_OnTextChangedDelayed);
 
 				tabPage.Controls.Add(tb);
 			}
@@ -117,13 +115,13 @@ namespace LibHTreeProcessing.src.gui
 			}
 		}
 
-		private SourceCodeTextControl SelectedScriptControl
+		private IScriptEditorControl SelectedScriptControl
 		{
 			get {
 				int n = tabControl2.SelectedIndex;
 				if (n < 0) return null;
 				TabPage tabPage = tabControl2.TabPages[n];
-				return (SourceCodeTextControl)(tabPage.Controls[0]);
+				return (IScriptEditorControl)(tabPage.Controls[0]);
 			}
 		}
 
@@ -240,12 +238,12 @@ namespace LibHTreeProcessing.src.gui
 			SourceCodeTextControl tb = new SourceCodeTextControl();
 			tb.Dock = DockStyle.Fill;
 			tb.Tag = fileNameWithoutExt;
-			tb.OnTextChangedDelayed += new SourceCodeTextControl.TextEventDelegate(tb_OnTextChangedDelayed);
+			tb.OnTextChangedDelayed += new OnTextEventDelegate(tb_OnTextChangedDelayed);
 
 			tabPage.Controls.Add(tb);
 		}
 
-		private void tb_OnTextChangedDelayed(SourceCodeTextControl source, string text)
+		private void tb_OnTextChangedDelayed(IScriptEditorControl source, string text)
 		{
 			string fileNameWithoutExt = (string)(source.Tag);
 
@@ -255,18 +253,24 @@ namespace LibHTreeProcessing.src.gui
 			try {
 				IScript script = parser.Compile(parsingContext, content);
 				lblError.Visible = false;
+				source.ErrorLines.Clear();
 			} catch (ScriptException se) {
 				lblError.Text = se.Message;
 				lblError.Visible = true;
-				if (se.LineNumber < 0) {
-					source.HighlightedLine = source.CountLines - 1;
-				} else {
-					source.HighlightedLine = se.LineNumber - 1;
-				}
+
+				source.ErrorLines.Clear();
+				source.ErrorLines.Add(se.LineNumber);
+
+				compilationError = se;
+
 			} catch (Exception ee) {
 				lblError.Text = ee.Message;
 				lblError.Visible = true;
-				source.HighlightedLine = -1;
+
+				compilationError = new CompilationError(0, ee.Message);
+
+				source.ErrorLines.Clear();
+				source.ErrorLines.Add(0);
 			}
 		}
 
@@ -289,7 +293,7 @@ namespace LibHTreeProcessing.src.gui
 
 			try {
 				HToolkit.XMLWriteSettings settings = new HToolkit.XMLWriteSettings();
-				settings.PrintStyle = HToolkit.EnumXMLPrintStyle.Pretty;
+				settings.PrintStyle = EnumXMLPrintStyle.Pretty;
 				settings.CheckInlineOverride = new HToolkit.CheckOutputTextAsInlineDelegate(__CheckOutputAsInline);
 				HToolkit.SaveAsXmlToFile(simpleTreeVisualizer2.RootNode, settings, null, null, sfd.FileName);
 			} catch (Exception ee) {
@@ -308,11 +312,11 @@ namespace LibHTreeProcessing.src.gui
 
 		private void lblError_Click(object sender, EventArgs e)
 		{
-			SourceCodeTextControl scriptControl = SelectedScriptControl;
+			if (compilationError == null) return;
+			IScriptEditorControl scriptControl = SelectedScriptControl;
 			if (scriptControl == null) return;
-			int n = scriptControl.HighlightedLine;
-			if (n < 0) return;
-			scriptControl.GoToLine(n);
+			if (compilationError.LineNumber < 0) return;
+			scriptControl.GoToLine(compilationError.LineNumber);
 		}
 
 	}

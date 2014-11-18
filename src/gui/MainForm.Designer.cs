@@ -44,7 +44,7 @@
 			this.edtPlainText = new System.Windows.Forms.TextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnTokenize = new System.Windows.Forms.Button();
-			this.backgroundTaskList1 = new LibHTreeProcessing.src.backgroundtasks.BackgroundTaskList();
+			this.backgroundTaskList1 = new LibNLPCSharp.bgtask.BackgroundTaskList();
 			this.contextMenuStrip1.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -281,7 +281,7 @@
 		private System.Windows.Forms.TabPage tabPage4;
 		private SimpleTreeVisualizer simpleTreeVisualizer1;
 		private System.Windows.Forms.ToolStripMenuItem miSelectNodeByPath;
-		private backgroundtasks.BackgroundTaskList backgroundTaskList1;
+		private LibNLPCSharp.bgtask.BackgroundTaskList backgroundTaskList1;
 	}
 }
 

@@ -84,7 +84,7 @@ namespace LibHTreeProcessing.src.simplexml
 			}
 		}
 
-		public static HElement Convert(XmlDocument doc, bool bResolveEntities,
+		public static HElement Convert(XmlDocument doc, XMLLoadSettings settings,
 			out int countElements, out int countTexts, out int countAttributes)
 		{
 			countElements = 1;
@@ -92,9 +92,9 @@ namespace LibHTreeProcessing.src.simplexml
 			countAttributes = 0;
 
 			HElement rootNode = new HElement(doc.DocumentElement.Name);
-			__CopyAttributes(doc.DocumentElement, rootNode, ref countAttributes);
+			__CopyAttributes(doc.DocumentElement, rootNode, settings.ResolveXmlEntitiesAtAttributes, ref countAttributes);
 
-			__CopyNodes(doc.DocumentElement.ChildNodes, rootNode.Children, bResolveEntities,
+			__CopyNodes(doc.DocumentElement.ChildNodes, rootNode.Children, settings,
 				ref countElements, ref countTexts, ref countAttributes);
 
 			return rootNode;
@@ -102,14 +102,22 @@ namespace LibHTreeProcessing.src.simplexml
 
 		public static HElement Convert(XmlElement doc, bool bResolveEntities)
 		{
+			XMLLoadSettings settings = new XMLLoadSettings();
+			settings.ResolveXmlEntitiesAtNodes = bResolveEntities ? EnumResolveXmlEntitiesMode.ResolveAllEntities : EnumResolveXmlEntitiesMode.PreserveAllEntitiesAsText;
+			settings.ResolveXmlEntitiesAtAttributes = bResolveEntities ? EnumResolveXmlEntitiesMode.ResolveAllEntities : EnumResolveXmlEntitiesMode.PreserveAllEntitiesAsText;
+			return Convert(doc, settings);
+		}
+
+		public static HElement Convert(XmlElement doc, XMLLoadSettings settings)
+		{
 			int countElements = 1;
 			int countTexts = 0;
 			int countAttributes = 0;
 
 			HElement rootNode = new HElement(doc.Name);
-			__CopyAttributes(doc, rootNode, ref countAttributes);
+			__CopyAttributes(doc, rootNode, settings.ResolveXmlEntitiesAtAttributes, ref countAttributes);
 
-			__CopyNodes(doc.ChildNodes, rootNode.Children, bResolveEntities, ref countElements, ref countTexts, ref countAttributes);
+			__CopyNodes(doc.ChildNodes, rootNode.Children, settings, ref countElements, ref countTexts, ref countAttributes);
 
 			return rootNode;
 		}
@@ -117,14 +125,23 @@ namespace LibHTreeProcessing.src.simplexml
 		public static HElement Convert(XmlElement doc, bool bResolveEntities,
 			out int countElements, out int countTexts, out int countAttributes)
 		{
+			XMLLoadSettings settings = new XMLLoadSettings();
+			settings.ResolveXmlEntitiesAtNodes = bResolveEntities ? EnumResolveXmlEntitiesMode.ResolveAllEntities : EnumResolveXmlEntitiesMode.PreserveAllEntitiesAsText;
+			settings.ResolveXmlEntitiesAtAttributes = bResolveEntities ? EnumResolveXmlEntitiesMode.ResolveAllEntities : EnumResolveXmlEntitiesMode.PreserveAllEntitiesAsText;
+			return Convert(doc, settings, out countElements, out countTexts, out countAttributes);
+		}
+
+		public static HElement Convert(XmlElement doc, XMLLoadSettings settings,
+			out int countElements, out int countTexts, out int countAttributes)
+		{
 			countElements = 1;
 			countTexts = 0;
 			countAttributes = 0;
 
 			HElement rootNode = new HElement(doc.Name);
-			__CopyAttributes(doc, rootNode, ref countAttributes);
+			__CopyAttributes(doc, rootNode, settings.ResolveXmlEntitiesAtAttributes, ref countAttributes);
 
-			__CopyNodes(doc.ChildNodes, rootNode.Children, bResolveEntities,
+			__CopyNodes(doc.ChildNodes, rootNode.Children, settings,
 				ref countElements, ref countTexts, ref countAttributes);
 
 			return rootNode;

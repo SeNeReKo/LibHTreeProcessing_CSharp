@@ -54,6 +54,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Proj\NLPCSharp\NLPCSharp\bin\Debug\LibNLPCSharp.dll</HintPath>
     </Reference>
+    <Reference Include="LibSimpleScriptEditor">
+      <HintPath>..\..\..\LibSimpleScriptEditor_CSharp\LibSimpleScriptEditor\bin\Debug\LibSimpleScriptEditor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -65,39 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\backgroundtasks\AbstractBackgroundTask.cs" />
-    <Compile Include="src\backgroundtasks\Argument.cs" />
-    <Compile Include="src\backgroundtasks\ArgumentDescription.cs" />
-    <Compile Include="src\backgroundtasks\ArgumentEditorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\backgroundtasks\ArgumentEditorControl.Designer.cs">
-      <DependentUpon>ArgumentEditorControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\backgroundtasks\ArgumentEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\backgroundtasks\ArgumentEditorForm.Designer.cs">
-      <DependentUpon>ArgumentEditorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\backgroundtasks\ArgumentList.cs" />
-    <Compile Include="src\backgroundtasks\BackgroundTaskLabel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\backgroundtasks\BackgroundTaskLabel.Designer.cs">
-      <DependentUpon>BackgroundTaskLabel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\backgroundtasks\BackgroundTaskList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\backgroundtasks\BackgroundTaskList.Designer.cs">
-      <DependentUpon>BackgroundTaskList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\backgroundtasks\EnumBackgroundTaskState.cs" />
-    <Compile Include="src\backgroundtasks\IBackgroundTask.cs" />
-    <Compile Include="src\backgroundtasks\OnBackgroundTaskDelegate.cs" />
-    <Compile Include="src\backgroundtasks\OnTaskProgressDelegate.cs" />
-    <Compile Include="src\backgroundtasks\ProgressIndicator.cs" />
     <Compile Include="src\gui\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,15 +76,6 @@
     </Compile>
     <Compile Include="src\gui\MainForm.HelperMethods.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\gui\RichTextLineNumbers.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="src\gui\ScriptEditorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\gui\ScriptEditorControl.Designer.cs">
-      <DependentUpon>ScriptEditorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="src\gui\SearchForm.cs">
       <SubType>Form</SubType>
@@ -129,12 +90,6 @@
     <Compile Include="src\gui\SimpleTreeVisualizer.designer.cs">
       <DependentUpon>SimpleTreeVisualizer.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\gui\SourceCodeTextControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\gui\SourceCodeTextControl.Designer.cs">
-      <DependentUpon>SourceCodeTextControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\gui\TransformHierarchicalDocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +98,9 @@
     </Compile>
     <Compile Include="src\HierarchyPath.cs" />
     <Compile Include="src\LoadingQueue.cs" />
+    <Compile Include="src\simplexml\EnumResolveXmlEntitiesMode.cs" />
+    <Compile Include="src\simplexml\EnumXMLPrintStyle.cs" />
+    <Compile Include="src\simplexml\EnumXMLTextOutputEncoding.cs" />
     <Compile Include="src\simplexml\HXmlException.cs" />
     <Compile Include="src\simplexml\impl\MyBufferedCharacterStream.cs" />
     <Compile Include="src\simplexml\impl\MyChar.cs" />
@@ -362,34 +320,14 @@
     <Compile Include="src\TagObject.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\backgroundtasks\ArgumentEditorControl.resx">
-      <DependentUpon>ArgumentEditorControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\backgroundtasks\ArgumentEditorForm.resx">
-      <DependentUpon>ArgumentEditorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\backgroundtasks\BackgroundTaskLabel.resx">
-      <DependentUpon>BackgroundTaskLabel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\backgroundtasks\BackgroundTaskList.resx">
-      <DependentUpon>BackgroundTaskList.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\gui\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\gui\ScriptEditorControl.resx">
-      <DependentUpon>ScriptEditorControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\gui\SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\gui\SimpleTreeVisualizer.resx">
       <DependentUpon>SimpleTreeVisualizer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\gui\SourceCodeTextControl.resx">
-      <DependentUpon>SourceCodeTextControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\gui\TransformHierarchicalDocumentForm.resx">
       <DependentUpon>TransformHierarchicalDocumentForm.cs</DependentUpon>
